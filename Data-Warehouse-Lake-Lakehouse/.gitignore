@@ -1,0 +1,17 @@
+# Dữ liệu và kết quả sinh ra khi chạy lab (tải lại được bằng script)
+solution/code/lakehouse_lab/
+.venv/
+__pycache__/
+
+# File phụ của LaTeX
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.run.xml
+*-blx.bib
+*.fdb_latexmk
+*.fls
+*.synctex.gz

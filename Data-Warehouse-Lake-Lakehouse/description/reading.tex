@@ -1,0 +1,1793 @@
+\documentclass[12pt]{article}
+\usepackage{makecell}
+\usepackage{hyphenat}
+\usepackage[utf8]{vietnam}
+\usepackage[vietnamese=nohyphenation]{hyphsubst}
+\usepackage[vietnamese]{babel}
+\usepackage[table,dvipsnames]{xcolor} % Required for row coloring
+\usepackage{booktabs} % Required for nicer horizontal lines
+\usepackage{ragged2e}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage[inline,shortlabels]{enumitem}
+\usepackage{setspace}
+\usepackage{longtable}
+\usepackage{bm} 
+\usepackage[inkscapelatex=false]{svg}
+\usepackage{titling}
+\usepackage{tabularx}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,mathrsfs}
+% \usepackage[draft]{hyperref}
+\usepackage{hyperref}
+\usepackage{xparse}
+\usepackage{fontawesome5}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{matrix, fit, shadows, positioning, arrows.meta, calc, shapes.geometric, backgrounds, shapes.symbols}
+\usepackage{paracol}
+\usepackage{bbm}
+\usepackage{pgfplots}
+\usepackage{siunitx}
+\usepackage{multirow}
+%  biblatex (thay cho IEEEtran.bst) ------------------------------------
+\usepackage[
+    backend=bibtex,
+    style=ieee,
+    citestyle=numeric-comp,
+    maxnames=1,     % chỉ hiển thị 1 tên tác giả, phần còn lại thành ``et al."
+    minnames=1,
+    uniquelist=false,
+    hyperref=false
+]{biblatex}
+\usepackage{forest}
+\addbibresource{references.bib}
+\DefineBibliographyStrings{english}{
+  andothers = {et\addabbrvspace al\adddot}
+}
+\AtBeginBibliography{\selectlanguage{english}}
+
+% -----------------------------------------------------------------
+\AtBeginDocument{\renewcommand\refname{}}
+
+\usepackage[toc,page]{appendix}
+\renewcommand{\appendixtocname}{Phụ lục}      
+\renewcommand{\appendixpagename}{Phụ lục}
+
+\usepackage{xurl}
+\setlength{\headheight}{14.5pt}
+\setlength{\topmargin}{-.5in} \setlength{\textheight}{9.25in}
+\setlength{\oddsidemargin}{-0.1in} \setlength{\textwidth}{6.8in}
+
+\usepackage{tocloft}
+\renewcommand{\cfttoctitlefont}{\Huge\bfseries}
+\setlength{\cftaftertoctitleskip}{2em}
+\setlength{\cftbeforesubsecskip}{7pt} % giãn cách subitem mục lục
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftsecnumwidth}{3em}
+\renewcommand{\cftsecaftersnum}{\quad}
+\renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftsubsecnumwidth}{4em}
+\renewcommand{\cftsubsecaftersnum}{\quad}
+\renewcommand{\cftsubsubsecleader}{\cftdotfill{\cftdotsep}}
+\setlength   {\cftsubsubsecnumwidth}{5em}  
+\renewcommand{\cftsubsubsecaftersnum}{\quad}
+
+\PassOptionsToPackage{vietnamese.licr}{babel}
+\usepackage{vipythonhighlight}
+\usepackage{tvietlistings}
+\newcounter{mycounter}
+\newcommand\showmycounter{\stepcounter{mycounter}\themycounter}
+\usepackage{lipsum}
+\newcommand\showlips{\stepcounter{mycounter}\lipsum[\value{mycounter}]}
+
+%--------------------------------------------------------------------
+\usepackage{framed}
+\usepackage{fancyhdr}
+\usepackage{upquote}
+\usepackage{listings}	 
+	    
+
+\usepackage[toc, nonumberlist, style=super]{glossaries}
+\makenoidxglossaries
+
+\newglossarystyle{clean3col}{%
+    % 1) Table layout: 3 columns
+    \renewenvironment{theglossary}%
+    {%
+      \begin{longtable}{@{}
+        >{\setlength{\parindent}{0pt}\RaggedRight\arraybackslash}p{0.2\linewidth}
+        >{\setlength{\parindent}{0pt}\RaggedRight\arraybackslash}p{0.23\linewidth}
+        >{\setlength{\parindent}{0pt}\RaggedRight\arraybackslash}p{0.52\linewidth}
+      @{}}%
+    }%
+    {\end{longtable}}%
+
+    % 2) Header row
+    \renewcommand{\glossaryheader}{%
+        \bfseries Thuật ngữ &
+        \bfseries Tạm dịch &
+        \bfseries Mô tả \\
+        \midrule
+        \endhead
+    }%
+
+    % 3) Each entry row
+    \renewcommand{\glossentry}[2]{%
+        \itshape \glstarget{##1}{\glossentryname{##1}} &
+        \glsentryuseri{##1} &
+        \glossentrydesc{##1} \\
+        \addlinespace[6pt]
+    }%
+}
+
+
+% Color --------------------------------------------------------------------
+\usepackage{epigraph}
+\usepackage{titlesec}
+
+\definecolor{codebackground}{RGB}{250, 250, 250}
+\definecolor{codecomment}{RGB}{34, 139, 34}
+\definecolor{codekeyword}{RGB}{0, 0, 255}
+\definecolor{codestring}{RGB}{255, 0, 0}
+\definecolor{codeidentifier}{RGB}{0, 0, 0}
+\definecolor{codelinenumbers}{RGB}{90, 90, 90}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\definecolor{aivnGreen}{RGB}{52,79,30}  
+\definecolor{aivnCodeOutputColor}{RGB}{11,83,148}  
+\definecolor{captiongray}{gray}{0.15} 
+\definecolor{captionbg}{RGB}{250,250,250}
+
+\definecolor{foldercolor}{RGB}{0, 102, 204}
+\definecolor{filecolor}{RGB}{104, 104, 104}
+\definecolor{scriptcolor}{RGB}{180, 50, 50}
+\definecolor{pythoncolor}{RGB}{0, 128, 128}
+
+% --- Extra Brand colors for the table ---
+\definecolor{brandIndigo}{HTML}{333D91} 
+\definecolor{rowLavender}{HTML}{EEECFA}
+\setlength{\parskip}{0.3em}
+
+% Table
+\newtcolorbox{captionbelowboxaivn}{
+    colback=aivnGreen,
+    colframe=aivnGreen,
+    boxrule=0pt,
+    arc=4pt,
+    left=4pt,
+    right=4pt,
+    top=2pt,
+    bottom=2pt,
+    width=\linewidth,
+    boxsep=4pt,
+    halign=center,
+    % fontupper=\bfseries\color{white}
+    fontupper=\color{white}
+}
+
+% Figure
+\newtcolorbox{figurecardcaptionaivn}{
+  colback=aivnGreen,        % Màu nền (background color)
+  colframe=aivnGreen,       % Màu viền box (border color)
+  boxrule=0pt,              % Độ dày viền box (0pt = không viền)
+  arc=2pt,                  % Độ bo góc (2pt là bo nhẹ, tăng để bo tròn hơn)
+  top=3pt,                  % Padding phía trên nội dung
+  bottom=3pt,               % Padding phía dưới nội dung
+  left=10pt,                % Padding bên trái
+  right=10pt,               % Padding bên phải
+  width=\linewidth,         % Chiều rộng bằng toàn bộ dòng
+  fontupper=\small\fontsize{11pt}{13pt}\selectfont\color{white} 
+}
+
+% Tạo counter riêng
+\newcounter{hinh}
+% Định nghĩa macro caption Hình
+\newcommand{\capfig}[1]{%
+  \refstepcounter{hinh}%
+  % \textbf{Hình~\thehinh:}~#1
+    Hình~\thehinh:~#1
+}
+
+\newtcolorbox{figurecaptionmodern}{
+  colback=captionbg,
+  colframe=aivnGreen,
+  boxrule=1.5pt,
+  bottomrule=2pt,  
+  toptitle=0pt,
+  bottomtitle=0pt,
+  left=6pt,
+  right=6pt,
+  top=4pt,
+  bottom=2pt,
+  width=\linewidth,
+  fontupper=\small\fontsize{11pt}{13pt}\selectfont\color{black},
+  halign=center
+}
+
+% Code Block -----------------------------------------------------------------
+\newtcolorbox{aivncodebox}[1][]{%
+  enhanced,
+  colback=gray!10,
+  colframe=aivnGreen,
+  coltitle=white,
+  colbacktitle=aivnGreen,
+  title=#1,
+  fonttitle=\bfseries\sffamily,
+  listing only,
+  breakable,
+  listing engine=listings,
+  listing options={
+    language=Python,
+    basicstyle=\ttfamily\footnotesize,
+    commentstyle=\color{ForestGreen},
+    keywordstyle=\color{blue},
+    stringstyle=\color{red!70!black},
+    numbers=left, upquote=true,
+    numberstyle=\tiny\color{gray},
+    numbersep=5pt,
+    breaklines=true,
+    showstringspaces=false,
+    xleftmargin=1.5em,
+    framexleftmargin=1.5em
+  }
+}
+
+% Code Output Block -----------------------------------------------------------------
+\newtcolorbox{aivnCodeOutput}[1][]{%
+  enhanced,
+  colback=gray!10,
+  colframe=aivnCodeOutputColor,
+  coltitle=white,
+  colbacktitle=aivnCodeOutputColor,
+  title=#1,
+  fonttitle=\bfseries\sffamily,
+  listing only,
+  breakable,
+  listing engine=listings,
+  listing options={
+    language=Python,
+    basicstyle=\ttfamily\footnotesize,
+    commentstyle=\color{ForestGreen},
+    keywordstyle=\color{blue},
+    stringstyle=\color{red!70!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=5pt,
+    breaklines=true,
+    showstringspaces=false,
+    xleftmargin=1.5em,
+    framexleftmargin=1.5em
+  }
+}
+
+% Last argument allows more tcolorbox options to be added
+
+% --- Guideline/Tip box ---
+\newtcolorbox{guidelinebox}[2][]{
+    enhanced, colback=yellow!10!white, colframe=orange!90!black, boxrule=1pt, arc=4pt,
+    fonttitle=\bfseries, attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    colbacktitle=orange!90!black, coltitle=white,
+    title=\faLightbulb\hspace{1mm} #2, #1
+}
+
+\newtcolorbox{notebox}[1][]{
+  enhanced,  colback=yellow!10, colframe=orange!80, boxrule=1pt, 
+  arc=4pt, fontupper=\small, attach boxed title to top left={yshift=-2mm, xshift=3mm},
+  colbacktitle=orange!80,  coltitle=white, fonttitle=\bfseries,  
+  title=\faInfoCircle~\textbf{Lưu ý},  #1
+}
+
+\newtcolorbox{infobox}[1]{%
+    enhanced, 
+    breakable, 
+    colback=green!3, 
+    colframe=green!3, 
+    arc=5pt,
+    borderline west={3pt}{0pt}{aivnGreen},
+    attach boxed title to top left={ 
+        yshift*=-\tcboxedtitleheight/2, 
+        xshift=-0.1em 
+    },
+    colbacktitle=aivnGreen, %
+    coltitle=white, 
+    fonttitle=\bfseries, 
+    boxed title style={ 
+        arc=4pt, 
+        top=2pt, 
+        bottom=2pt,
+        left=8pt,
+        right=8pt,
+    },
+    title={\faInfoCircle\quad #1}
+}
+\newtcolorbox{examplebox}[1]{%
+    enhanced,
+    breakable,
+    colback=brandIndigo!5,      
+    colframe=brandIndigo!5,     
+    arc=5pt,
+    borderline west={3pt}{0pt}{brandIndigo}, 
+    attach boxed title to top left={
+        yshift*=-\tcboxedtitleheight/2,
+        xshift=-0.1em
+    },
+    colbacktitle=brandIndigo,   
+    coltitle=white,
+    fonttitle=\bfseries,
+    boxed title style={
+        arc=4pt,
+        top=2pt,
+        bottom=2pt,
+        left=8pt,
+        right=8pt,
+    },
+    title={\faLightbulb\quad #1} 
+}
+% Prompt Block ---------------------------------------------------------------
+\definecolor{promptBlue}{HTML}{2F5D8C}
+\definecolor{promptBg}{HTML}{F6F9FC}
+\definecolor{promptBorder}{HTML}{B7C9DC}
+
+% Dùng cho prompt đã viết theo cú pháp LaTeX bình thường
+\newtcolorbox{promptbox}[1][Prompt]{%
+    enhanced,
+    breakable,
+    colback=promptBg,
+    colframe=promptBorder,
+    coltitle=white,
+    colbacktitle=promptBlue,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    boxrule=0.8pt,
+    arc=4pt,
+    left=8pt,
+    right=8pt,
+    top=2pt,
+    bottom=1pt,
+    before skip=8pt,
+    after skip=8pt,
+    borderline west={3pt}{0pt}{promptBlue},
+    fontupper=\small\sffamily,
+}
+
+% Dùng cho prompt raw: giữ nguyên xuống dòng, không highlight keyword
+\newtcblisting{promptboxraw}[1][Prompt]{%
+    enhanced,
+    breakable,
+    listing only,
+    listing engine=listings,
+    colback=promptBg,
+    colframe=promptBorder,
+    coltitle=white,
+    colbacktitle=promptBlue,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    boxrule=0.8pt,
+    arc=4pt,
+    left=8pt,
+    right=8pt,
+    top=-4pt,
+    bottom=-4pt,
+    before skip=4pt,
+    after skip=4pt,
+    borderline west={3pt}{0pt}{promptBlue},
+    listing options={
+        language={},
+        basicstyle=\small\ttfamily,
+        columns=fullflexible,
+        keepspaces=true,
+        breaklines=true,
+        showstringspaces=false,
+        numbers=none,
+        frame=none,
+        keywordstyle=\color{black},
+        commentstyle=\color{black},
+        stringstyle=\color{black},
+        identifierstyle=\color{black}
+    }
+}
+
+
+%--------------------------------------------------------------------
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{codebackground},
+    commentstyle=\color{codecomment},
+    keywordstyle=\color{codekeyword},
+    stringstyle=\color{codestring},
+    identifierstyle=\color{codeidentifier},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numberstyle=\tiny\color{codelinenumbers}, 
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,    
+    citecolor=green,
+    urlcolor=blue,
+    pdftitle={Data Warehouse, Data Lake và Data Lakehouse},
+    pdfpagemode=FullScreen,
+}
+
+%--------------------------------------------------------------------
+\newcounter{choice}
+\renewcommand\thechoice{($\alph{choice}$)}
+\newcommand\choicelabel{\thechoice}
+
+%--------------------------------------------------------------------
+\newenvironment{choices}%
+  {\list{\choicelabel}%
+     {\usecounter{choice}\def\makelabel##1{\hss\llap{##1}}%
+       \settowidth{\leftmargin}{W.\hskip\labelsep\hskip 0 em}%
+       \def\choice{%
+         \item
+       } % choice
+       \labelwidth\leftmargin\advance\labelwidth-\labelsep
+       \topsep=0pt
+       \partopsep=0pt
+     }%
+  }%
+  {\endlist}
+  
+%--------------------------------------------------------------------
+\def\CChoice{%
+      \choice
+      \addanswer{\theenumi}{\thechoice}%
+    }
+    \let\CChoice\CChoice
+%    \par % Uncomment this to have choices always start a new line
+   % \let\par\@empty
+    % If we're continuing the textbf containing the question,
+    % then leave a bit of space before the first choice:
+    \ifvmode\else\enskip\fi
+    \ignorespaces
+  %
+  {}
+\makeatother
+\newbox\allanswers
+\setbox\allanswers=\hbox{}
+\newcommand{\addanswer}[2]{%
+  \global\setbox\allanswers=\hbox{\unhbox\allanswers \quad #1.~#2}%
+}
+\newcommand{\showanswers}{%
+  \vfill
+  \begin{center}
+    Answers
+  \end{center}
+  \unhbox\allanswers
+}
+
+\makeatletter
+\newenvironment{multichoices}[1][1]{%
+\begin{multicols}{#1}}{%
+\end{multicols}}
+\makeatother
+
+\pagestyle{fancy}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\E}{\mathbb{E}}
+
+% Outline --------------------------------------------------------------------
+% Section numbering ----------------------------------------------------------
+\renewcommand{\thesection}{\Roman{section}.} 
+\renewcommand{\thesubsection}{\thesection\arabic{subsection}.}
+\renewcommand{\thesubsubsection}{\thesubsection\arabic{subsubsection}.}
+
+% Paper-like section title sizes --------------------------------------------
+% Title paper: 17pt
+% Section should be clearly smaller than title but still prominent.
+\titleformat{\section}
+  {\normalfont\fontsize{16pt}{20pt}\selectfont\bfseries}
+  {\thesection}
+  {0.85em}
+  {}
+
+\titleformat{\subsection}
+  {\normalfont\fontsize{14pt}{16pt}\selectfont\bfseries}
+  {\thesubsection}
+  {0.75em}
+  {}
+
+\titleformat{\subsubsection}
+  {\normalfont\fontsize{12pt}{15pt}\selectfont\bfseries}
+  {\thesubsubsection}
+  {0.65em}
+  {}
+
+% Paper-like compact spacing -------------------------------------------------
+\titlespacing*{\section}
+  {0pt}
+  {1.25em plus 0.2em minus 0.1em}
+  {0.65em plus 0.1em minus 0.1em}
+
+\titlespacing*{\subsection}
+  {0pt}
+  {1.0em plus 0.2em minus 0.1em}
+  {0.45em plus 0.1em minus 0.1em}
+
+\titlespacing*{\subsubsection}
+  {0pt}
+  {0.85em plus 0.15em minus 0.1em}
+  {0.35em plus 0.1em minus 0.1em}
+
+
+% Logo + Title ---------------------------------------------------------------
+
+\setlength{\droptitle}{-7em}
+
+% Title horizontal rule
+\newcommand{\TitleRule}{%
+  \rule{0.90\textwidth}{0.6pt}
+}
+
+% Chiều cao vùng title giữa 2 rule
+\newlength{\TitleBlockHeight}
+\setlength{\TitleBlockHeight}{2.2cm}
+
+\pretitle{%
+  
+
+  % Logo row
+  \begin{tabular}{@{}c@{\hspace{1.0em}}c@{\hspace{1.0em}}c@{}}
+    \raisebox{-0.35\height}{\includegraphics[height=2.0cm]{Figures/aio2026_logo.pdf}}    
+  \end{tabular}
+
+  %\vspace{0.2em}
+
+\begin{center}
+  \TitleRule
+  \par\nointerlineskip
+}
+
+\title{%
+  \parbox[c][\TitleBlockHeight][c]{0.90\textwidth}{%
+    \centering
+    {\fontsize{20pt}{24pt}\selectfont\bfseries Data Warehouse, Data Lake\\ và Data Lakehouse}\\[6pt]
+    {\fontsize{13pt}{15pt}\selectfont (Data Architecture)}
+  }%
+}
+
+\posttitle{%
+  \par\nointerlineskip
+  \TitleRule
+  \end{center}
+}
+
+\preauthor{%
+  \begin{center}
+  \fontsize{11pt}{13pt}\selectfont
+}
+
+\author{%
+  \textbf{Minh-Tuan Le}
+  \hspace{2.8em}
+  \textbf{Thi-Vang Nguyen}\\
+  \vspace{1em}
+  \textbf{Proofreading: }
+}
+
+\postauthor{%
+  \par
+  \end{center}
+}
+
+\date{}
+% Header --------------------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\href{https://www.facebook.com/aivietnam.edu.vn}{\textcolor{aivnGreen}{\bfseries AI VIET NAM (AIO2026)}}}
+\rhead{\href{https://aivietnam.edu.vn/}{\textcolor{aivnGreen}{\bfseries aivietnam.edu.vn}}}
+\fancyfoot[r]{\textcolor{aivnGreen}{\bfseries\foreignlanguage{vietnamese}{Trang \thepage}}}
+\fancyfoot[l]{%
+  \href{https://zalo.me/84911118758}{%
+    \textcolor{aivnGreen}{\bfseries\foreignlanguage{vietnamese}{SĐT/Zalo: 0911118758 (Dr. Hồng Phúc)}}%
+  }%
+}
+\renewcommand{\headrulewidth}{1.0pt}
+\renewcommand{\headrule}{{\color{aivnGreen}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}}
+
+\renewcommand{\footrulewidth}{1.0pt}
+\renewcommand{\footrule}{{\color{aivnGreen}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}}
+
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \fancyfoot[r]{\textcolor{aivnGreen}{\bfseries\foreignlanguage{vietnamese}{Trang \thepage}}}
+    \fancyfoot[l]{%
+      \href{https://zalo.me/84911118758}{%
+        \textcolor{aivnGreen}{\bfseries\foreignlanguage{vietnamese}{SĐT/Zalo: 0911118758 (Dr. Hồng Phúc)}}%
+      }%
+    }
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{1.0pt}
+    \renewcommand{\footrule}{%
+        {\color{aivnGreen}\hrule width\headwidth height\footrulewidth}
+    }
+}
+
+
+% ============================================================================
+% Bổ sung cho bài đọc (giữ nguyên preamble của template AIVN ở trên)
+% ============================================================================
+\usetikzlibrary{decorations.pathreplacing}
+\newcolumntype{L}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{P}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\tocloftpagestyle{firstpage}
+\setlength{\cftsecnumwidth}{3.6em}
+\setlength{\emergencystretch}{1.5em}
+% Giữ hình/bảng đi liền với caption
+\newenvironment{figblock}{\par\medskip\noindent\begin{minipage}{\linewidth}}{\end{minipage}\par\medskip}
+\colorlet{colA}{aivnGreen!28}
+\colorlet{colB}{brandIndigo!22}
+\colorlet{colC}{orange!32}
+\definecolor{bronzeC}{RGB}{205,127,50}
+\definecolor{silverC}{RGB}{150,155,165}
+\definecolor{goldC}{RGB}{212,160,23}
+
+% Caption cho hình: \figcap{nội dung}{label}
+\newcommand{\figcap}[2]{%
+  \begin{figurecaptionmodern}\capfig{#1}\label{#2}\end{figurecaptionmodern}}
+% Caption cho bảng: \tabcap{nội dung}{label}
+\newcounter{bang}
+\newcommand{\tabcap}[2]{%
+  \begin{captionbelowboxaivn}\refstepcounter{bang}Bảng~\thebang:~#1\label{#2}\end{captionbelowboxaivn}}
+
+% Bảng thuật ngữ (in ở cuối bài) ----------------------------------------------
+\newglossaryentry{oltp}{name={OLTP}, user1={Xử lý giao dịch trực tuyến}, description={Workload gồm nhiều giao dịch nhỏ, mỗi giao dịch đọc hoặc ghi vài dòng, ví dụ tạo đơn hàng hay cập nhật trạng thái chuyến xe.}}
+\newglossaryentry{olap}{name={OLAP}, user1={Xử lý phân tích trực tuyến}, description={Workload truy vấn quét nhiều dòng nhưng ít cột, tổng hợp theo nhiều chiều.}}
+\newglossaryentry{sow}{name={Schema-on-write}, user1={Áp schema khi ghi}, description={Dữ liệu phải khớp schema đã khai báo trước khi được nạp; dòng sai bị từ chối.}}
+\newglossaryentry{sor}{name={Schema-on-read}, user1={Áp schema khi đọc}, description={Dữ liệu được lưu nguyên dạng; engine tự suy ra cấu trúc lúc truy vấn.}}
+\newglossaryentry{objstore}{name={Object storage}, user1={Lưu trữ đối tượng}, description={Kho lưu file dạng key--value như S3, GCS, ADLS, MinIO; không có thư mục thật, chỉ có prefix của key.}}
+\newglossaryentry{swamp}{name={Data swamp}, user1={Đầm lầy dữ liệu}, description={Data Lake mất kiểm soát: không ai biết file nào hợp lệ, schema nào là hiện hành.}}
+\newglossaryentry{tformat}{name={Open table format}, user1={Định dạng bảng mở}, description={Đặc tả metadata mô tả một bảng gồm những file nào, schema, partition và lịch sử phiên bản (Iceberg, Delta Lake, Hudi).}}
+\newglossaryentry{catalog}{name={Catalog}, user1={Danh mục bảng}, description={Dịch vụ giữ con trỏ tới metadata hiện hành của từng bảng và thực hiện commit nguyên tử.}}
+\newglossaryentry{snapshot}{name={Snapshot}, user1={Ảnh chụp trạng thái}, description={Trạng thái đầy đủ của bảng sau một lần commit.}}
+\newglossaryentry{manifest}{name={Manifest}, user1={Tệp kê khai}, description={File Avro liệt kê data file kèm thống kê từng cột, dùng để loại file khi lập kế hoạch truy vấn.}}
+\newglossaryentry{cas}{name={Compare-and-swap}, user1={So sánh rồi hoán đổi}, description={Phép cập nhật nguyên tử: chỉ đổi con trỏ nếu giá trị hiện tại vẫn đúng như writer đã đọc.}}
+\newglossaryentry{cow}{name={Copy-on-Write}, user1={Sao chép khi ghi}, description={Sửa hoặc xóa dòng bằng cách ghi lại toàn bộ file chứa dòng đó.}}
+\newglossaryentry{mor}{name={Merge-on-Read}, user1={Gộp khi đọc}, description={Ghi riêng thông tin xóa hoặc sửa và gộp vào dữ liệu gốc lúc đọc.}}
+\newglossaryentry{dv}{name={Deletion vector}, user1={Vector đánh dấu xóa}, description={Bitmap cho biết những dòng nào trong một data file đã bị xóa.}}
+\newglossaryentry{tt}{name={Time travel}, user1={Truy vấn quá khứ}, description={Đọc bảng tại một snapshot hoặc một thời điểm trước đây.}}
+\newglossaryentry{hidden}{name={Hidden partitioning}, user1={Partition ẩn}, description={Partition được tính từ cột nguồn qua transform như day, month, bucket; người dùng chỉ lọc trên cột gốc.}}
+\newglossaryentry{compaction}{name={Compaction}, user1={Gộp file}, description={Ghi lại nhiều file nhỏ thành ít file lớn để giảm chi phí đọc và lập kế hoạch truy vấn.}}
+\newglossaryentry{orphan}{name={Orphan file}, user1={File mồ côi}, description={File nằm trong thư mục bảng nhưng không còn metadata nào tham chiếu tới.}}
+\newglossaryentry{vending}{name={Credential vending}, user1={Cấp quyền tạm thời}, description={Catalog cấp token lưu trữ ngắn hạn, chỉ có hiệu lực với đúng bảng mà truy vấn được phép đọc.}}
+\newglossaryentry{medallion}{name={Medallion architecture}, user1={Kiến trúc huy chương}, description={Tổ chức dữ liệu thành các lớp Bronze, Silver, Gold theo mức độ làm sạch và tinh chỉnh.}}
+\newglossaryentry{grain}{name={Grain}, user1={Độ chi tiết}, description={Ý nghĩa của một dòng trong fact table, ví dụ một dòng là một chuyến xe.}}
+\newglossaryentry{sk}{name={Surrogate key}, user1={Khóa thay thế}, description={Khóa do warehouse tự sinh, độc lập với khóa của hệ thống nguồn.}}
+\newglossaryentry{scd2}{name={SCD Type 2}, user1={Dimension thay đổi chậm loại 2}, description={Lưu lịch sử thay đổi thuộc tính bằng cách thêm dòng mới kèm khoảng thời gian hiệu lực.}}
+
+\begin{document}
+\maketitle
+\thispagestyle{firstpage}
+\vspace{-3em}
+
+\tableofcontents
+\newpage
+
+% ============================================================================
+\section{Giới thiệu}
+% ============================================================================
+
+Taxi vàng ở New York thực hiện khoảng ba triệu chuyến xe mỗi tháng. Mỗi chuyến được ghi lại thời điểm đón và trả khách, quãng đường, giá cước, tiền tip và hình thức thanh toán~\cite{tlc2026data}. Ba nhóm người cùng cần dữ liệu này:
+
+\begin{itemize}
+    \item \textbf{Nhà phân tích BI} cần dashboard doanh thu theo ngày và theo hãng, cập nhật mỗi sáng.
+    \item \textbf{Data scientist} cần toàn bộ lịch sử ở dạng thô để huấn luyện mô hình dự đoán tiền tip hoặc nhu cầu đặt xe.
+    \item \textbf{Data engineer} cần một nơi lưu trữ không bị hỏng khi pipeline gặp lỗi, cho phép sửa dòng sai và truy lại trạng thái cũ.
+\end{itemize}
+
+Trong gần bốn mươi năm, câu hỏi ``dữ liệu phân tích nên nằm ở đâu'' đã có ba câu trả lời nối tiếp nhau (Hình~\ref{fig:timeline}). \textbf{Data Warehouse} được Devlin và Murphy mô tả năm 1988~\cite{devlin1988architecture}, sau đó được Inmon và Kimball phát triển thành phương pháp luận~\cite{inmon2005building,kimball2013toolkit}. \textbf{Data Lake} do James Dixon đặt tên năm 2010~\cite{dixon2010datalake}, gắn với Hadoop và sau này là cloud object storage. \textbf{Data Lakehouse} được Armbrust và cộng sự định nghĩa tại hội nghị CIDR năm 2021~\cite{armbrust2021lakehouse}.
+
+\begin{figblock}\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tikzpicture}[
+  era/.style={draw=aivnGreen, line width=0.8pt, fill=aivnGreen!6, rounded corners=3pt,
+              text width=4.6cm, align=center, inner sep=6pt, font=\small},
+  yr/.style={font=\small\bfseries, text=aivnGreen}]
+  \draw[-{Stealth[length=3mm]}, line width=1.2pt, aivnGreen] (-0.4,0) -- (16,0);
+  \foreach \x/\y in {2.5/1988, 7.75/2010, 13/2021}{
+    \fill[aivnGreen] (\x,0) circle (3.5pt);
+    \node[yr, below=5pt] at (\x,0) {\y};
+    \draw[aivnGreen, dashed] (\x,0) -- (\x,0.5);
+  }
+  \node[era, anchor=south] at (2.5,0.5) {\textbf{Data Warehouse}\\[2pt] Devlin \& Murphy (IBM), Inmon, Kimball\\[2pt] Schema-on-write, SQL, BI};
+  \node[era, anchor=south] at (7.75,0.5) {\textbf{Data Lake}\\[2pt] James Dixon, Hadoop, S3\\[2pt] Schema-on-read, file thô, ML};
+  \node[era, anchor=south] at (13,0.5) {\textbf{Data Lakehouse}\\[2pt] Armbrust và cộng sự (CIDR)\\[2pt] Table format mở + catalog};
+\end{tikzpicture}
+\end{adjustbox}
+\end{center}
+\figcap{Ba thế hệ kiến trúc dữ liệu phân tích.}{fig:timeline}
+\end{figblock}
+
+Bài đọc giải thích ba kiến trúc từ cơ chế bên trong, không dừng ở bảng so sánh tính năng. Sau khi đọc, bạn có thể:
+
+\begin{enumerate}
+    \item Phân biệt Data Warehouse, Data Lake và Data Lakehouse bằng một câu hỏi: lớp nào sở hữu khái niệm ``bảng''.
+    \item Giải thích vì sao Data Lake thuần dễ biến thành data swamp, và cách một table format như Apache Iceberg khắc phục bằng metadata cùng commit nguyên tử.
+    \item Thiết kế một nền tảng kết hợp cả ba kiến trúc theo mô hình Medallion.
+    \item Tự chạy pipeline Bronze $\rightarrow$ Silver $\rightarrow$ Gold trên laptop với dữ liệu NYC Taxi thật, không cần tài khoản cloud.
+\end{enumerate}
+
+\begin{notebox}
+Bài đọc giả định bạn đã biết SQL cơ bản (\texttt{SELECT}, \texttt{JOIN}, \texttt{GROUP BY}) và Python cơ bản. Mọi output trong bài được lấy từ việc chạy thật bộ code đi kèm (xem mục~\ref{sec:lab}).
+\end{notebox}
+
+% ============================================================================
+\section{Ba lớp của một nền tảng phân tích}
+\label{sec:layers}
+% ============================================================================
+
+Mọi nền tảng phân tích đều gồm ba lớp:
+
+\begin{itemize}
+    \item \textbf{Compute}: engine thực thi truy vấn SQL, biến đổi dữ liệu hoặc huấn luyện mô hình, ví dụ Spark, Trino, DuckDB.
+    \item \textbf{Table format và catalog}: metadata cho biết một bảng gồm những file nào, schema ra sao, partition thế nào và đang ở phiên bản nào.
+    \item \textbf{Storage và file format}: nơi các byte thực sự nằm (đĩa của database, HDFS, Amazon S3) cùng định dạng file (Parquet, CSV, JSON).
+\end{itemize}
+
+Khác biệt cốt lõi giữa ba kiến trúc nằm ở việc \textbf{ai sở hữu lớp ở giữa} (Hình~\ref{fig:layers}):
+
+\begin{itemize}
+    \item \textbf{Data Warehouse}: vendor sở hữu cả ba lớp. Người dùng chỉ làm việc qua SQL, còn file vật lý bị ẩn sau storage engine riêng. Snowflake, BigQuery hay Redshift tính tiền compute và storage riêng, nhưng engine bên ngoài vẫn phải đi qua giao diện của vendor để đọc dữ liệu.
+    \item \textbf{Data Lake}: không ai sở hữu lớp bảng. ``Bảng'' chỉ là một quy ước, tức tập file nằm dưới một prefix như \texttt{s3://bucket/orders/}. Mỗi engine tự liệt kê file và tự suy ra schema.
+    \item \textbf{Data Lakehouse}: một table format mở cùng một catalog sở hữu định nghĩa bảng, còn dữ liệu vẫn là file Parquet trên object storage. Engine hỏi catalog để biết snapshot hiện hành gồm những file nào, rồi đọc hoặc ghi trực tiếp các file đó.
+\end{itemize}
+
+\begin{figblock}\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tikzpicture}[
+  lay/.style={draw=gray!60, fill=gray!5, rounded corners=2pt, minimum height=1.15cm,
+              align=center, font=\footnotesize, text width=4.1cm},
+  open/.style={lay, draw=brandIndigo, fill=brandIndigo!8},
+  owner/.style={lay, draw=aivnGreen, fill=aivnGreen!15, line width=1pt},
+  noone/.style={lay, draw=red!60!black, fill=red!5, dashed, line width=0.8pt},
+  head/.style={font=\bfseries\small},
+  side/.style={font=\footnotesize\bfseries, align=right, anchor=east, text width=2.3cm},
+  note/.style={font=\footnotesize\itshape}]
+  \node[side] at (-2.4,2.7) {Compute};
+  \node[side] at (-2.4,1.35) {Table format\\+ Catalog};
+  \node[side] at (-2.4,0) {Storage\\+ File format};
+  \node[head] at (0,3.8) {Data Warehouse};
+  \node[head] at (4.8,3.8) {Data Lake};
+  \node[head] at (9.6,3.8) {Data Lakehouse};
+  % Data Warehouse
+  \node[owner] (dw1) at (0,2.7) {SQL engine của vendor};
+  \node[owner] (dw2) at (0,1.35) {Catalog nội bộ,\\ẩn với người dùng};
+  \node[owner] (dw3) at (0,0) {Định dạng lưu trữ\\độc quyền};
+  \node[draw=aivnGreen, line width=1.4pt, rounded corners=5pt, inner sep=5pt, fit=(dw1)(dw3)] {};
+  \node[note, text=aivnGreen] at (0,-1.1) {Vendor sở hữu cả ba lớp};
+  % Data Lake
+  \node[open] at (4.8,2.7) {Spark, Trino, pandas,\\DuckDB\dots};
+  \node[noone] at (4.8,1.35) {Không có: ``bảng'' chỉ là\\một prefix thư mục};
+  \node[open] at (4.8,0) {S3, ADLS, GCS, HDFS\\CSV, JSON, Parquet};
+  \node[note, text=red!60!black] at (4.8,-1.1) {Không ai sở hữu bảng};
+  % Data Lakehouse
+  \node[open] at (9.6,2.7) {Spark, Trino, Flink,\\DuckDB, PyIceberg\dots};
+  \node[owner] at (9.6,1.35) {Iceberg / Delta / Hudi\\+ catalog (mở)};
+  \node[open] at (9.6,0) {S3, ADLS, GCS, MinIO\\Parquet};
+  \node[note, text=aivnGreen] at (9.6,-1.1) {Table format mở sở hữu bảng};
+\end{tikzpicture}
+\end{adjustbox}
+\end{center}
+\figcap{Ba lớp của nền tảng phân tích và lớp sở hữu ``bảng'' trong từng kiến trúc. Khung xanh lá là lớp sở hữu bảng, khung xanh dương là thành phần mở mà nhiều bên dùng chung.}{fig:layers}
+\end{figblock}
+
+\begin{infobox}{Câu hỏi để phân loại một hệ thống}
+Khi một engine muốn đọc bảng \texttt{orders}, nó hỏi ai để biết bảng gồm những file nào?
+\begin{itemize}
+    \item Hỏi engine của vendor $\Rightarrow$ Data Warehouse.
+    \item Tự liệt kê thư mục $\Rightarrow$ Data Lake.
+    \item Hỏi catalog của một table format mở $\Rightarrow$ Data Lakehouse.
+\end{itemize}
+\end{infobox}
+
+% ============================================================================
+\section{Data Warehouse}
+% ============================================================================
+
+\subsection{OLTP và OLAP: hai kiểu workload khác nhau}
+
+Database phía sau ứng dụng như PostgreSQL hay MySQL được tối ưu cho OLTP: rất nhiều giao dịch nhỏ, mỗi giao dịch chạm vài dòng. Câu hỏi phân tích lại có dạng OLAP: quét hàng triệu dòng nhưng chỉ cần vài cột, rồi tổng hợp theo nhiều chiều (Bảng~\ref{tab:oltp}).
+
+\begin{figblock}\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|>{\RaggedRight\arraybackslash}p{3.2cm}|L|L|}
+\hline
+\rowcolor{rowLavender}
+\textbf{Tiêu chí} & \textbf{OLTP} & \textbf{OLAP} \\
+\hline
+Truy vấn ví dụ & Cập nhật trạng thái chuyến xe \#123 & Doanh thu theo ngày của từng hãng trong hai tháng \\
+\hline
+Số dòng mỗi truy vấn & Vài dòng & Hàng triệu dòng \\
+\hline
+Số cột cần đọc & Gần như mọi cột của một dòng & Vài cột trên rất nhiều dòng \\
+\hline
+Thao tác chính & \texttt{INSERT}, \texttt{UPDATE}, \texttt{DELETE} & \texttt{SELECT} với \texttt{JOIN}, \texttt{GROUP BY} \\
+\hline
+Mô hình dữ liệu & Chuẩn hóa (3NF) để tránh trùng lặp & Star schema, chấp nhận phi chuẩn hóa \\
+\hline
+Cách lưu phù hợp & Theo dòng (row-oriented) & Theo cột (columnar) \\
+\hline
+\end{tabularx}
+\end{center}
+\tabcap{So sánh workload OLTP và OLAP.}{tab:oltp}
+\end{figblock}
+
+Chạy truy vấn phân tích trực tiếp trên database vận hành gặp bốn vấn đề: truy vấn quét lớn tranh tài nguyên với giao dịch của khách hàng, schema chuẩn hóa buộc phải \texttt{JOIN} nhiều bảng, database chỉ giữ trạng thái hiện tại thay vì lịch sử, và dữ liệu nằm rải rác ở nhiều hệ thống. Data Warehouse là một hệ thống riêng cho phân tích, gom dữ liệu từ các nguồn về một nơi và lưu theo cách tối ưu cho OLAP.
+
+\subsection{Lưu trữ theo dòng và theo cột}
+
+Lưu theo dòng đặt liền nhau các giá trị của cùng một dòng; lưu theo cột đặt liền nhau các giá trị của cùng một cột (Hình~\ref{fig:rowcol}a). Với truy vấn \texttt{SELECT avg(fare\_amount) FROM trips}, cách lưu theo cột chỉ cần đọc một cột. Các giá trị cùng kiểu đứng cạnh nhau nên cũng nén tốt hơn.
+
+\begin{figblock}\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tikzpicture}[cell/.style={draw=white, line width=0.8pt, minimum width=1.1cm, minimum height=0.62cm,
+                                  font=\scriptsize\ttfamily, inner sep=0pt},
+                    lbl/.style={font=\footnotesize\bfseries, anchor=west}]
+  % Bảng logic
+  \node[font=\footnotesize\bfseries] at (1.65,3.15) {(a) Bảng logic};
+  \foreach \c/\n/\col in {0/vendor/colA, 1/fare/colB, 2/tip/colC}
+    \node[cell, fill=\col, font=\scriptsize\bfseries\ttfamily] at (\c*1.1+0.55,2.5) {\n};
+  \foreach \r/\a/\b/\cc in {1/1/12.5/2.0, 2/2/8.0/0.0, 3/2/20.0/4.5}{
+    \node[cell, fill=colA!45] at (0.55,2.5-\r*0.62) {\a};
+    \node[cell, fill=colB!45] at (1.65,2.5-\r*0.62) {\b};
+    \node[cell, fill=colC!45] at (2.75,2.5-\r*0.62) {\cc};
+  }
+  % Lưu theo dòng
+  \node[lbl] at (4.4,2.55) {Lưu theo dòng: đọc fare phải đi qua mọi cột};
+  \foreach \i/\v/\col in {0/1/colA, 1/12.5/colB, 2/2.0/colC, 3/2/colA, 4/8.0/colB, 5/0.0/colC, 6/2/colA, 7/20.0/colB, 8/4.5/colC}
+    \node[cell, fill=\col!45] at (4.95+\i*1.1,1.9) {\v};
+  % Lưu theo cột
+  \node[lbl] at (4.4,0.95) {Lưu theo cột: đọc fare chỉ cần một khối liên tục};
+  \foreach \i/\v/\col in {0/1/colA, 1/2/colA, 2/2/colA, 3/12.5/colB, 4/8.0/colB, 5/20.0/colB, 6/2.0/colC, 7/0.0/colC, 8/4.5/colC}
+    \node[cell, fill=\col!45] at (4.95+\i*1.1,0.3) {\v};
+  \draw[brandIndigo, line width=1.4pt, rounded corners=2pt] (7.70,-0.03) rectangle (11.0,0.63);
+\end{tikzpicture}
+\end{adjustbox}
+
+\vspace{0.6em}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tikzpicture}[chunk/.style={draw=white, line width=0.8pt, minimum width=3cm, minimum height=0.5cm, font=\scriptsize},
+                    rg/.style={font=\footnotesize\bfseries}]
+  \node[font=\footnotesize\bfseries] at (4.9,2.05) {(b) Cấu trúc một file Parquet};
+  \foreach \x/\t in {0/Row group 1, 3.4/Row group 2}{
+    \node[rg] at (\x+1.5,1.35) {\t};
+    \node[chunk, fill=colA] at (\x+1.5,0.8) {column chunk: vendor};
+    \node[chunk, fill=colB] at (\x+1.5,0.3) {column chunk: fare};
+    \node[chunk, fill=colC] at (\x+1.5,-0.2) {column chunk: tip};
+  }
+  \node[draw=gray!70, fill=gray!10, rounded corners=2pt, minimum width=3.4cm, minimum height=2.0cm,
+        align=center, font=\scriptsize] at (8.9,0.55)
+        {\textbf{Footer}\\ schema\\ vị trí từng column chunk\\ min / max / null count\\ của từng chunk};
+  \node[draw=gray!80, line width=0.8pt, rounded corners=4pt, fit={(-0.15,1.65) (10.75,-0.55)}] {};
+\end{tikzpicture}
+\end{adjustbox}
+\end{center}
+\figcap{(a) Cùng một bảng khi lưu theo dòng và theo cột. (b) File Parquet gồm các row group, mỗi row group chứa một column chunk cho từng cột, footer ở cuối file giữ schema và thống kê.}{fig:rowcol}
+\end{figblock}
+
+Apache Parquet là định dạng columnar mở phổ biến nhất~\cite{parquet2026format}. Như Hình~\ref{fig:rowcol}b, một file Parquet được chia thành các row group, mỗi row group chứa một column chunk cho từng cột, còn footer ở cuối file ghi schema cùng thống kê min, max, số giá trị null của từng column chunk. Engine đọc footer trước để thực hiện hai tối ưu:
+
+\begin{itemize}
+    \item \textbf{Projection pushdown}: chỉ đọc column chunk của các cột mà truy vấn cần.
+    \item \textbf{Predicate pushdown}: bỏ qua row group mà khoảng min--max cho thấy không thể thỏa điều kiện \texttt{WHERE}.
+\end{itemize}
+
+Đoạn code sau đọc footer của file chuyến xe tháng 1/2023 mà không cần đọc dữ liệu:
+
+\begin{aivncodebox}[01\_bronze\_data\_lake.py: đọc footer Parquet]
+\begin{python}
+pf = pq.ParquetFile(bronze_file("2023-01"))
+meta = pf.metadata
+print(f"Số dòng: {meta.num_rows:,} | Số cột: {meta.num_columns} | Số row group: {meta.num_row_groups}")
+rg = meta.row_group(0)
+for name in ["tpep_pickup_datetime", "fare_amount", "trip_distance"]:
+    col = rg.column(pf.schema_arrow.get_field_index(name))
+    st = col.statistics
+    print(f"  {name:<22} {col.total_compressed_size / 1e6:6.1f} MB  min={st.min}  max={st.max}")
+\end{python}
+\end{aivncodebox}
+
+\begin{aivnCodeOutput}[Output]
+\begin{python}
+Số dòng: 3,066,766 | Số cột: 19 | Số row group: 1
+  tpep_pickup_datetime     11.4 MB  min=2008-12-31 23:01:42  max=2023-02-01 00:56:53
+  fare_amount               3.1 MB  min=-900.0  max=1160.1
+  trip_distance             4.3 MB  min=-0.0  max=258928.15
+\end{python}
+\end{aivnCodeOutput}
+
+Chỉ riêng phần thống kê đã cho thấy dữ liệu có vấn đề: file tháng 1/2023 chứa chuyến đón khách năm 2008, giá cước âm và quãng đường hơn 258.000 dặm. Data Warehouse ngăn những dòng như vậy ngay từ lúc nạp, nhờ cơ chế dưới đây.
+
+\subsection{Schema-on-write}
+
+Data Warehouse áp dụng schema-on-write: bảng phải được khai báo trước bằng \texttt{CREATE TABLE} với kiểu dữ liệu và ràng buộc. Khi nạp, dòng không khớp kiểu bị từ chối. Cái giá là phải thiết kế schema trước khi có dữ liệu. Đổi lại, dữ liệu trong kho luôn đúng kiểu và người truy vấn không phải đoán cấu trúc.
+
+\subsection{Mô hình hóa: Inmon, Kimball và Star Schema}
+
+Có hai trường phái kinh điển để tổ chức dữ liệu trong warehouse:
+
+\begin{itemize}
+    \item \textbf{Inmon}~\cite{inmon2005building} xây một enterprise data warehouse chuẩn hóa theo 3NF làm nguồn sự thật chung, sau đó tách ra các data mart cho từng phòng ban.
+    \item \textbf{Kimball}~\cite{kimball2013toolkit} xây trực tiếp theo từng quy trình nghiệp vụ bằng dimensional modeling (star schema). Các mart dùng chung những dimension đã thống nhất (conformed dimension).
+\end{itemize}
+
+Ngoài ra, \textbf{Data Vault 2.0}~\cite{linstedt2015datavault} tách dữ liệu thành hub (khóa nghiệp vụ), link (quan hệ) và satellite (thuộc tính kèm lịch sử). Cách này phù hợp khi tích hợp nhiều nguồn và cần lưu vết đầy đủ.
+
+Star schema của Kimball gồm \textbf{fact table} chứa các phép đo của sự kiện nghiệp vụ và các \textbf{dimension table} chứa ngữ cảnh để lọc và nhóm. Kimball đề xuất bốn bước thiết kế: chọn quy trình nghiệp vụ, khai báo grain, xác định dimension, rồi xác định fact. Áp dụng cho dữ liệu taxi:
+
+\begin{enumerate}
+    \item \textbf{Quy trình nghiệp vụ}: chuyến xe hoàn thành.
+    \item \textbf{Grain}: một dòng trong fact table là một chuyến xe.
+    \item \textbf{Dimension}: hãng vận hành (vendor), hình thức thanh toán, ngày đón khách.
+    \item \textbf{Fact}: quãng đường, thời lượng, giá cước, tiền tip, tổng tiền.
+\end{enumerate}
+
+\begin{figblock}\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tikzpicture}[ent/.style={draw=#1, line width=0.9pt, inner sep=0pt, fill=white}]
+  \newcommand{\enthead}[2]{\rowcolor{#1}\multicolumn{1}{l}{\textcolor{white}{\bfseries #2}}\\}
+  \node[ent=aivnGreen] (f) at (0,0) {\footnotesize\ttfamily
+    \begin{tabular}{l}
+    \enthead{aivnGreen}{fact\_trips}
+    trip\_key \textrm{(surrogate key)}\\
+    vendor\_key \textrm{(FK)}\\
+    payment\_type\_key \textrm{(FK)}\\
+    pickup\_date\_key \textrm{(FK)}\\
+    pu\_location\_id, do\_location\_id\\
+    trip\_distance, duration\_min\\
+    fare\_amount, tip\_amount\\
+    total\_amount, tip\_per\_mile
+    \end{tabular}};
+  \node[ent=brandIndigo] (v) at (-6.2,1.4) {\footnotesize\ttfamily
+    \begin{tabular}{l}
+    \enthead{brandIndigo}{dim\_vendor}
+    vendor\_key \textrm{(PK)}\\
+    vendor\_name
+    \end{tabular}};
+  \node[ent=brandIndigo] (p) at (-6.2,-1.4) {\footnotesize\ttfamily
+    \begin{tabular}{l}
+    \enthead{brandIndigo}{dim\_payment\_type}
+    payment\_type\_key \textrm{(PK)}\\
+    payment\_name\\
+    is\_revenue
+    \end{tabular}};
+  \node[ent=brandIndigo] (d) at (6.2,0) {\footnotesize\ttfamily
+    \begin{tabular}{l}
+    \enthead{brandIndigo}{dim\_date}
+    date\_key \textrm{(PK, YYYYMMDD)}\\
+    full\_date, day\_name\\
+    is\_weekend, month, year
+    \end{tabular}};
+  \draw[line width=0.9pt, gray] (f.west) -- (v.east);
+  \draw[line width=0.9pt, gray] (f.west) -- (p.east);
+  \draw[line width=0.9pt, gray] (f.east) -- (d.west);
+\end{tikzpicture}
+\end{adjustbox}
+\end{center}
+\figcap{Star schema của phần thực hành: \mbox{\texttt{fact\_trips}} ở giữa, nối tới ba dimension qua khóa ngoại.}{fig:star}
+\end{figblock}
+
+Khóa của dimension nên là surrogate key do warehouse sinh ra thay vì dùng thẳng mã của nguồn. Ví dụ thật: data dictionary năm 2018 của NYC TLC ghi mã vendor 2 là \textit{VeriFone Inc.}, còn bản năm 2025 ghi \textit{Curb Mobility, LLC}~\cite{tlc2025dictionary}. Nếu báo cáo lịch sử cần hiển thị đúng tên tại thời điểm chuyến xe diễn ra, \texttt{dim\_vendor} phải lưu theo SCD Type 2 (Bảng~\ref{tab:scd2}). Khi đó mã nguồn 2 ứng với hai dòng, và chỉ surrogate key mới phân biệt được chúng.
+
+\begin{figblock}\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{|c|c|l|c|c|c|}
+\hline
+\rowcolor{rowLavender}
+\textbf{vendor\_key} & \textbf{vendor\_id} & \textbf{vendor\_name} & \textbf{valid\_from} & \textbf{valid\_to} & \textbf{is\_current} \\
+\hline
+11 & 2 & VeriFone Inc. & 2009-01-01 & 2023-06-30 & FALSE \\
+\hline
+27 & 2 & Curb Mobility, LLC & 2023-07-01 & 9999-12-31 & TRUE \\
+\hline
+\end{tabular}
+\end{center}
+\tabcap{\texttt{dim\_vendor} theo SCD Type 2. Ngày hiệu lực chỉ để minh họa cơ chế, không phải ngày đổi tên thật.}{tab:scd2}
+\end{figblock}
+
+\subsection{Ưu điểm và giới hạn}
+
+Data Warehouse mạnh ở truy vấn SQL hiệu năng cao, phục vụ nhiều người dùng đồng thời, có ACID, phân quyền chi tiết và được vendor vận hành tự động. Giới hạn của nó đến từ chính việc vendor sở hữu cả ba lớp:
+
+\begin{itemize}
+    \item Chi phí lưu trữ và compute tăng nhanh khi dữ liệu lên tới hàng trăm terabyte.
+    \item Chủ yếu phục vụ dữ liệu có cấu trúc; log, ảnh, âm thanh khó đưa vào.
+    \item Dữ liệu bị khóa trong định dạng riêng. Thư viện ML như pandas hay PyTorch phải xuất dữ liệu qua JDBC/ODBC, rất chậm khi dữ liệu lớn~\cite{armbrust2021lakehouse}.
+\end{itemize}
+
+% ============================================================================
+\section{Data Lake}
+\label{sec:lake}
+% ============================================================================
+
+\subsection{Object storage}
+
+James Dixon dùng hình ảnh ``hồ dữ liệu'' để mô tả cách lưu dữ liệu nguyên dạng và chỉ quyết định cách dùng về sau~\cite{dixon2010datalake}. Ngày nay Data Lake chủ yếu nằm trên object storage: Amazon S3, Google Cloud Storage, Azure Data Lake Storage, hoặc MinIO khi tự vận hành. Năm đặc điểm của object storage quyết định cách Data Lake hoạt động:
+
+\begin{itemize}
+    \item Object storage là kho key--value. Key có dạng \nolinkurl{bronze/yellow_tripdata/year=2023/month=01/part-0.parquet}, value là nội dung file. Không có thư mục thật; ``thư mục'' chỉ là phần prefix chung của các key.
+    \item Liệt kê file theo prefix (LIST) là một lời gọi qua mạng và chậm dần khi prefix chứa hàng trăm nghìn file.
+    \item Mỗi object được ghi trọn vẹn hoặc không được ghi, nhưng không có thao tác nguyên tử cho nhiều file cùng lúc.
+    \item Chi phí lưu trữ thấp, và storage tách rời compute nên nhiều engine có thể dùng chung một bản dữ liệu.
+    \item Từ tháng 12/2020, Amazon S3 đảm bảo strong read-after-write consistency: ghi xong thì mọi lần đọc sau đều thấy bản mới~\cite{aws2020consistency}. Đây là một điều kiện kỹ thuật để Lakehouse hoạt động đúng.
+\end{itemize}
+
+\subsection{Định dạng file}
+
+Data Lake chấp nhận mọi định dạng. Bảng~\ref{tab:formats} tóm tắt các định dạng phổ biến.
+
+\begin{figblock}\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|P{2.6cm}|P{2.4cm}|L|L|}
+\hline
+\rowcolor{rowLavender}
+\textbf{Định dạng} & \textbf{Cách lưu} & \textbf{Schema} & \textbf{Thường dùng cho} \\
+\hline
+CSV & Dòng, văn bản & Không có kiểu dữ liệu & Trao đổi dữ liệu đơn giản \\
+\hline
+JSON / JSON Lines & Dòng, văn bản & Mỗi bản ghi tự mô tả, cho phép lồng nhau & Log ứng dụng, dữ liệu API \\
+\hline
+Avro & Dòng, nhị phân & Schema lưu trong file & Streaming, Kafka, metadata của Iceberg \\
+\hline
+Parquet & Cột, nhị phân & Schema và thống kê trong footer & Phân tích, Lakehouse \\
+\hline
+ORC & Cột, nhị phân & Schema và thống kê theo stripe & Hệ sinh thái Hive \\
+\hline
+\end{tabularx}
+\end{center}
+\tabcap{Các định dạng file thường gặp trong Data Lake.}{tab:formats}
+\end{figblock}
+
+\subsection{Schema-on-read và partition kiểu Hive}
+
+Data Lake theo nguyên tắc schema-on-read: ghi trước, hiểu sau. Không ai kiểm tra schema lúc ghi, còn engine suy ra schema lúc đọc. Để không phải quét toàn bộ dữ liệu, file được chia vào thư mục theo quy ước của Hive, tên thư mục có dạng \texttt{cột=giá\_trị}. Khi gặp điều kiện \texttt{WHERE month = '01'}, engine chỉ liệt kê prefix tương ứng.
+
+\begin{aivncodebox}[01\_bronze\_data\_lake.py: ``bảng'' Data Lake chỉ là một glob]
+\begin{python}
+GLOB = f"{BRONZE_DIR}/**/*.parquet"
+con = duckdb.connect()
+con.sql(f"""
+    SELECT year, month, count(*) AS trips, round(avg(fare_amount), 2) AS avg_fare
+    FROM read_parquet('{GLOB}', hive_partitioning = true)
+    GROUP BY ALL ORDER BY ALL
+""").show()
+\end{python}
+\end{aivncodebox}
+
+\begin{aivnCodeOutput}[Output]
+\begin{python}
++-------+---------+---------+----------+
+| year  |  month  |  trips  | avg_fare |
++-------+---------+---------+----------+
+|  2023 | 01      | 3066766 |    18.37 |
+|  2023 | 02      | 2913955 |    18.22 |
++-------+---------+---------+----------+
+\end{python}
+\end{aivnCodeOutput}
+
+Partition kiểu Hive có ba hạn chế. Người dùng phải biết cột partition và lọc đúng trên cột đó: điều kiện trên \texttt{tpep\_pickup\_datetime} không tự loại được thư mục \texttt{year=}/\texttt{month=}. Đổi cách chia partition đồng nghĩa với ghi lại toàn bộ dữ liệu. Chia quá mịn sinh ra rất nhiều file nhỏ (small files problem), làm chậm cả thao tác LIST lẫn việc mở file.
+
+\subsection{Khi không ai sở hữu bảng: data swamp}
+
+Script \texttt{01\_bronze\_data\_lake.py} tái hiện bốn lỗi điển hình của Data Lake thuần. Lỗi thứ nhất có sẵn trong dữ liệu gốc: NYC TLC đổi schema giữa tháng 1 và tháng 2 năm 2023.
+
+\begin{aivnCodeOutput}[Lỗi 1: schema drift có thật giữa hai file nguồn]
+\begin{python}
+  VendorID             int64    ->  VendorID             int32
+  passenger_count      double   ->  passenger_count      int64
+  RatecodeID           double   ->  RatecodeID           int64
+  store_and_fwd_flag   string   ->  store_and_fwd_flag   large_string
+  PULocationID         int64    ->  PULocationID         int32
+  DOLocationID         int64    ->  DOLocationID         int32
+  airport_fee          double   ->  Airport_fee          double
+\end{python}
+\end{aivnCodeOutput}
+
+Sáu cột đổi kiểu và một cột đổi tên chỉ bằng cách viết hoa chữ cái đầu. Engine đọc glob phải tự đoán cách hợp nhất, và mỗi engine có thể đoán một kiểu. Lỗi thứ hai xảy ra khi một job khác ghi file sai kiểu vào cùng prefix:
+
+\begin{aivnCodeOutput}[Lỗi 2: một file sai kiểu làm hỏng mọi truy vấn trên prefix]
+\begin{python}
+Truy vấn thất bại (ConversionException): failed to cast column "VendorID" from type
+VARCHAR to BIGINT: : Could not convert string 'INVALID_ID' to INT64
+\end{python}
+\end{aivnCodeOutput}
+
+Lỗi thứ ba là ghi dở dang. Một job ghi dữ liệu tháng 2 thành bốn file nhưng bị dừng sau file thứ hai:
+
+\begin{aivnCodeOutput}[Lỗi 3: partial write]
+\begin{python}
+  đã ghi part-0.parquet
+  đã ghi part-1.parquet
+  !!! job bị kill khi đang ghi part-2
+Reader thấy 1,456,978 dòng / 2,913,955 dòng (50%), không có cảnh báo nào.
+\end{python}
+\end{aivnCodeOutput}
+
+Lỗi thứ tư là không có \texttt{UPDATE} hay \texttt{DELETE}. Muốn xóa 26 chuyến có giá cước trên 500 USD, ta phải đọc rồi ghi lại toàn bộ file 48 MB chứa hơn 3 triệu dòng. Trong lúc thay file, một reader khác có thể thấy file cũ, file mới hoặc không thấy file nào.
+
+Gộp các lỗi trên với việc không có catalog (không biết ai ghi file nào, khi nào, file nào còn hợp lệ), Data Lake dần trở thành data swamp.
+
+% ============================================================================
+\section{Kiến trúc hai tầng và sự ra đời của Lakehouse}
+% ============================================================================
+
+Trong những năm 2010, cách làm phổ biến là kết hợp cả hai: Data Lake lưu dữ liệu thô và phục vụ ML, còn một phần dữ liệu được ETL tiếp sang Data Warehouse cho BI (Hình~\ref{fig:twotier}).
+
+\begin{figblock}\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tikzpicture}[
+  box/.style={draw=#1, line width=0.9pt, fill=#1!8, rounded corners=3pt, align=center,
+              font=\footnotesize, minimum height=1.2cm, text width=2.7cm},
+  arr/.style={-{Stealth[length=2.5mm]}, line width=1pt, gray!70!black},
+  warn/.style={font=\scriptsize, text=red!65!black, align=center, text width=3.2cm}]
+  \node[box=gray] (src) at (0,0) {\textbf{Nguồn}\\OLTP, log, API};
+  \node[box=brandIndigo] (lake) at (3.6,0) {\textbf{Data Lake}\\file thô trên S3};
+  \node[box=orange, text width=1.4cm] (etl) at (6.7,0) {\textbf{ETL}};
+  \node[box=aivnGreen] (dw) at (9.8,0) {\textbf{Data Warehouse}\\bản sao đã làm sạch};
+  \node[box=gray] (bi) at (13.4,0) {\textbf{BI}\\dashboard};
+  \node[box=gray] (ml) at (3.6,-2.4) {\textbf{Data science / ML}\\đọc file trực tiếp};
+  \draw[arr] (src) -- (lake);
+  \draw[arr] (lake) -- (etl);
+  \draw[arr] (etl) -- (dw);
+  \draw[arr] (dw) -- (bi);
+  \draw[arr] (lake) -- (ml);
+  \node[warn, above=4pt] at (dw.north) {Bản sao thứ hai, trễ hàng giờ đến hàng ngày};
+  \node[warn, below=4pt, text width=4.2cm] at (etl.south) {Thêm một pipeline có thể lệch kiểu, múi giờ, NULL};
+  \node[warn, right=6pt, text width=4.2cm, align=left] at (ml.east) {Không có ACID; phân quyền phải cấu hình ở hai hệ thống};
+\end{tikzpicture}
+\end{adjustbox}
+\end{center}
+\figcap{Kiến trúc hai tầng: Data Lake cho dữ liệu thô và ML, Data Warehouse cho BI.}{fig:twotier}
+\end{figblock}
+
+Armbrust và cộng sự chỉ ra bốn vấn đề của kiến trúc này~\cite{armbrust2021lakehouse}:
+
+\begin{enumerate}
+    \item \textbf{Độ tin cậy}: hai hệ thống phải được giữ khớp nhau, và mỗi bước ETL là một chỗ có thể làm lệch kiểu dữ liệu, múi giờ hay cách xử lý NULL.
+    \item \textbf{Dữ liệu cũ}: dữ liệu trong warehouse thường trễ hơn nguồn hàng giờ đến hàng ngày.
+    \item \textbf{Hỗ trợ ML hạn chế}: thư viện ML cần đọc file trực tiếp, trong khi warehouse chỉ mở cổng SQL; còn dữ liệu trên lake lại thiếu ACID và schema.
+    \item \textbf{Tổng chi phí sở hữu}: lưu hai bản dữ liệu, trả tiền compute cho ETL, và quản trị phân quyền ở hai nơi.
+\end{enumerate}
+
+Ý tưởng Lakehouse là giữ dữ liệu trên object storage ở định dạng mở, rồi thêm một \textbf{lớp metadata có giao dịch} lên trên để có các tính năng quản trị của warehouse: ACID, quản lý phiên bản, tối ưu truy vấn~\cite{armbrust2021lakehouse}. Ba điều kiện đã cùng chín muồi vào khoảng năm 2020: định dạng columnar mở như Parquet, các table format như Delta Lake~\cite{armbrust2020delta}, Iceberg và Hudi, cùng strong consistency của object storage.
+
+% ============================================================================
+\section{Bên trong Data Lakehouse}
+\label{sec:lakehouse}
+% ============================================================================
+
+\subsection{Table format là gì}
+
+Open table format là một đặc tả quy định cách dùng file metadata để mô tả một bảng: bảng gồm những data file nào, schema và partition ra sao, và có những phiên bản nào. Data file vẫn là Parquet và \textbf{bất biến}: không bao giờ bị sửa tại chỗ. Mỗi thay đổi tạo ra file mới cùng metadata mới. Ba table format phổ biến là Apache Iceberg (khởi đầu tại Netflix), Delta Lake (Databricks) và Apache Hudi (Uber). Phần này lấy Iceberg làm ví dụ chính vì phần thực hành dùng PyIceberg.
+
+\subsection{Cây metadata của Apache Iceberg}
+
+Theo đặc tả Iceberg~\cite{iceberg2026spec}, metadata của một bảng là một cây năm tầng (Hình~\ref{fig:iceberg}):
+
+\begin{figblock}\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tikzpicture}[
+  mbox/.style={draw=#1, line width=0.9pt, fill=#1!8, rounded corners=3pt, align=center, font=\footnotesize},
+  arr/.style={-{Stealth[length=2.4mm]}, line width=0.9pt, gray!70!black},
+  pq/.style={draw=colC!80!black, fill=colC!50, rounded corners=2pt, font=\scriptsize\ttfamily, minimum width=1.75cm, minimum height=0.55cm}]
+  \node[mbox=aivnGreen, text width=7.2cm] (cat) at (0,0)
+    {\textbf{Catalog}\\ \texttt{silver.yellow\_trips} $\rightarrow$ \texttt{00006-\dots.metadata.json}};
+  \node[mbox=brandIndigo, text width=7.2cm] (meta) at (0,-1.75)
+    {\textbf{metadata.json} (phiên bản 6)\\ schema, partition spec, danh sách snapshot, \texttt{current-snapshot-id}};
+  \node[mbox=gray, text width=3.4cm, dashed] (old) at (-6.4,-1.75)
+    {\texttt{00000} \dots{} \texttt{00005}\\ các metadata.json cũ};
+  \node[mbox=brandIndigo, text width=7.2cm] (ml) at (0,-3.5)
+    {\textbf{Manifest list} \texttt{snap-<id>.avro}\\ một file cho mỗi snapshot; tóm tắt partition của từng manifest};
+  \node[mbox=brandIndigo, text width=4.6cm] (m0) at (-3.3,-5.35)
+    {\textbf{Manifest} \texttt{\dots-m0.avro}\\ data file + min/max từng cột};
+  \node[mbox=brandIndigo, text width=4.6cm] (m1) at (3.3,-5.35)
+    {\textbf{Manifest} \texttt{\dots-m1.avro}\\ data file + min/max từng cột};
+  \foreach \x/\n in {-4.4/a, -2.2/b, 2.2/c, 4.4/d} \node[pq] (p\n) at (\x,-7) {.parquet};
+  \draw[arr] (cat) -- (meta);
+  \draw[arr] (meta) -- (ml);
+  \draw[arr] (ml) -- (m0);
+  \draw[arr] (ml) -- (m1);
+  \draw[arr] (m0) -- (pa);  \draw[arr] (m0) -- (pb);
+  \draw[arr] (m1) -- (pc);  \draw[arr] (m1) -- (pd);
+  \draw[decorate, decoration={brace, amplitude=6pt}, line width=0.8pt] (7.4,0.45) -- (7.4,-0.45)
+    node[midway, right=9pt, font=\footnotesize, align=left] {Con trỏ\\(đổi bằng CAS)};
+  \draw[decorate, decoration={brace, amplitude=6pt}, line width=0.8pt] (7.4,-1.2) -- (7.4,-5.9)
+    node[midway, right=9pt, font=\footnotesize, align=left] {Metadata\\(JSON + Avro)};
+  \draw[decorate, decoration={brace, amplitude=6pt}, line width=0.8pt] (7.4,-6.6) -- (7.4,-7.4)
+    node[midway, right=9pt, font=\footnotesize, align=left] {Data file\\(Parquet)};
+\end{tikzpicture}
+\end{adjustbox}
+\end{center}
+\figcap{Cây metadata của một bảng Iceberg. Engine đi từ catalog xuống data file mà không cần liệt kê thư mục.}{fig:iceberg}
+\end{figblock}
+
+\begin{enumerate}
+    \item \textbf{Catalog} giữ một con trỏ duy nhất cho mỗi bảng: đường dẫn tới file \texttt{metadata.json} hiện hành.
+    \item \textbf{metadata.json} chứa schema (kèm các schema cũ), partition spec, thuộc tính bảng, danh sách snapshot và \texttt{current-snapshot-id}. Mỗi thay đổi tạo một \texttt{metadata.json} mới, đánh số \texttt{00000}, \texttt{00001},~\dots
+    \item \textbf{Manifest list} (\texttt{snap-<id>-\dots.avro}): mỗi snapshot có một manifest list, liệt kê các manifest của snapshot đó cùng khoảng giá trị partition của từng manifest.
+    \item \textbf{Manifest} (\texttt{\dots-m0.avro}): liệt kê data file hoặc delete file, kèm giá trị partition, số dòng, min, max và số null của từng cột.
+    \item \textbf{Data file}: file Parquet chứa dữ liệu thật.
+\end{enumerate}
+
+Khi lập kế hoạch truy vấn, engine dùng phần tóm tắt partition trong manifest list để bỏ qua cả một manifest, rồi dùng min/max trong manifest để bỏ qua từng data file. Toàn bộ quá trình không cần lệnh LIST nào trên object storage. Sau lần append đầu tiên trong phần thực hành, thư mục \texttt{metadata/} có đúng bốn file:
+
+\begin{aivnCodeOutput}[02\_silver\_lakehouse.py: thư mục metadata sau commit đầu tiên]
+\begin{python}
+00000-d6d4d355-...-4058619005ac.metadata.json      1.6 KB   # tạo bảng rỗng
+71240245-...-7edbede595e8-m0.avro                  5.4 KB   # manifest
+snap-1178427703463806229-0-71240245-....avro       1.8 KB   # manifest list
+00001-4fef47b5-...-609e32c717f7.metadata.json      2.6 KB   # sau khi append
+\end{python}
+\end{aivnCodeOutput}
+
+\subsection{Commit nguyên tử và ACID}
+
+Toàn bộ bảo đảm ACID của Iceberg dựa trên một thao tác duy nhất: đổi con trỏ trong catalog bằng compare-and-swap (CAS).
+
+\begin{examplebox}{Quy trình một lần ghi vào bảng Iceberg}
+\begin{enumerate}
+    \item Writer đọc metadata hiện hành, giả sử là phiên bản $N$.
+    \item Writer ghi các data file Parquet mới. Chưa reader nào nhìn thấy chúng vì chưa có metadata nào trỏ tới.
+    \item Writer ghi manifest, manifest list và \texttt{metadata.json} phiên bản $N+1$.
+    \item Writer yêu cầu catalog đổi con trỏ từ $N$ sang $N+1$, \textbf{với điều kiện} con trỏ vẫn đang là $N$.
+    \item Nếu một writer khác đã commit trước, điều kiện ở bước 4 sai và commit thất bại. Writer đọc metadata mới, kiểm tra xung đột với thay đổi của người kia, tạo lại metadata rồi thử lại.
+\end{enumerate}
+\end{examplebox}
+
+Từ quy trình này có đủ bốn tính chất ACID:
+
+\begin{itemize}
+    \item \textbf{Atomicity}: bước 4 là một phép đổi con trỏ duy nhất. Job chết trước bước 4 chỉ để lại vài file không ai tham chiếu, bảng không bị ảnh hưởng. Đây chính là lời giải cho lỗi partial write đã gặp ở Data Lake (mục~\ref{sec:lake}).
+    \item \textbf{Consistency}: writer phải ghi đúng schema của bảng. Ở phần thực hành, batch sai kiểu bị từ chối trước khi kịp commit.
+    \item \textbf{Isolation}: reader cố định một snapshot khi bắt đầu đọc (snapshot isolation), nên không bao giờ thấy dữ liệu đang ghi dở.
+    \item \textbf{Durability}: cả metadata lẫn data đều nằm trên storage bền vững.
+\end{itemize}
+
+Cơ chế này là \textbf{optimistic concurrency}: không khóa trước, xung đột chỉ được phát hiện lúc commit. Nó phù hợp với workload phân tích, nơi hiếm khi có nhiều writer cùng sửa một phần dữ liệu.
+
+\subsection{Schema evolution và partition evolution}
+
+Iceberg định danh cột bằng \textbf{field ID} thay vì tên hay vị trí. Thêm, đổi tên, xóa hay đổi thứ tự cột vì thế chỉ là thay đổi metadata. File cũ vẫn được đọc đúng qua field ID, và cột mới trả về NULL cho các file ghi trước khi có cột.
+
+Iceberg cũng hỗ trợ hidden partitioning: partition spec khai báo một transform trên cột nguồn, ví dụ \texttt{day(pickup\_at)}, \texttt{month(pickup\_at)}, \texttt{bucket(16, id)}. Người dùng chỉ viết điều kiện trên cột gốc, còn engine tự quy đổi sang partition. Khi đổi partition spec (partition evolution), chỉ dữ liệu ghi sau mới theo spec mới; file cũ giữ spec cũ, và engine lập kế hoạch riêng cho từng spec.
+
+\begin{aivncodebox}[02\_silver\_lakehouse.py: hai thay đổi chỉ chạm vào metadata]
+\begin{python}
+with tbl.update_schema() as update:
+    update.add_column("tip_per_mile", DoubleType(), doc="tip_amount / trip_distance")
+with tbl.update_spec() as spec:
+    spec.add_field("pickup_at", DayTransform(), "pickup_day")
+\end{python}
+\end{aivncodebox}
+
+\begin{aivnCodeOutput}[Output]
+\begin{python}
+Schema hiện tại có 16 cột, cột mới có field_id = 16
+Partition spec hiện tại: [
+  1000: pickup_day: day(2)
+]
+Snapshot hiện tại vẫn là 1178427703463806229: chưa file dữ liệu nào bị ghi lại.
+\end{python}
+\end{aivnCodeOutput}
+
+Sau đó dữ liệu tháng 2 được append theo spec mới. Bảng giờ có file thuộc hai spec, và truy vấn một ngày chỉ phải đọc đúng một file:
+
+\begin{aivnCodeOutput}[Output: file theo từng partition spec]
+\begin{python}
+         so_file  so_dong
+spec_id
+0              1  2998337     # tháng 01, không partition
+1             28  2850309     # tháng 02, partition theo ngày
+Truy vấn ngày 15/02 chỉ cần đọc 1/29 file nhờ partition pruning.
+\end{python}
+\end{aivnCodeOutput}
+
+\subsection{Thay đổi ở mức dòng: Copy-on-Write và Merge-on-Read}
+
+Data file là bất biến, vậy \texttt{UPDATE} và \texttt{DELETE} hoạt động thế nào? Table format dùng một trong hai chiến lược (Bảng~\ref{tab:cowmor}).
+
+\begin{figblock}\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|P{2.4cm}|L|L|}
+\hline
+\rowcolor{rowLavender}
+\textbf{Tiêu chí} & \textbf{Copy-on-Write (CoW)} & \textbf{Merge-on-Read (MoR)} \\
+\hline
+Cách làm & Ghi lại toàn bộ file chứa dòng bị đổi & Ghi riêng thông tin dòng bị xóa; \texttt{UPDATE} = xóa + chèn \\
+\hline
+Chi phí ghi & Cao: sửa vài dòng vẫn phải ghi lại cả file & Thấp: chỉ ghi phần thay đổi \\
+\hline
+Chi phí đọc & Thấp: đọc thẳng data file & Cao hơn: phải gộp delete vào dữ liệu lúc đọc \\
+\hline
+Phù hợp & Bảng đọc nhiều, cập nhật theo lô & CDC, streaming upsert, cập nhật thường xuyên; cần compaction định kỳ \\
+\hline
+\end{tabularx}
+\end{center}
+\tabcap{Hai chiến lược thay đổi dữ liệu ở mức dòng.}{tab:cowmor}
+\end{figblock}
+
+Với MoR, Iceberg format version 2 có hai loại delete file: \textit{position delete} ghi đường dẫn file và vị trí dòng bị xóa, \textit{equality delete} ghi điều kiện theo giá trị cột. Format version 3 bổ sung deletion vector, mỗi data file có một bitmap đánh dấu dòng đã xóa, lưu trong file Puffin~\cite{iceberg2026spec}. Iceberg 1.11.0 (phát hành ngày 19/5/2026) được xem là phiên bản mà các tính năng v3 như deletion vector và kiểu \texttt{VARIANT} đã sẵn sàng cho môi trường production~\cite{iceberg2026releases,dremio2026iceberg111}.
+
+PyIceberg thực hiện \texttt{DELETE} theo kiểu CoW, nên snapshot sinh ra có operation là \texttt{overwrite}:
+
+\begin{aivnCodeOutput}[02\_silver\_lakehouse.py: DELETE và lịch sử snapshot]
+\begin{python}
+Số dòng: 5,848,646 -> 5,848,609 (xóa 37 dòng)
+  22:37:59  snapshot=1178427703463806229  parent=None                 append
+  22:38:00  snapshot=5737701426491917244  parent=1178427703463806229  append
+  22:38:02  snapshot=5667705168284501283  parent=5737701426491917244  overwrite
+\end{python}
+\end{aivnCodeOutput}
+
+\subsection{Time travel, tag và rollback}
+
+Snapshot cũ vẫn nằm trong metadata cho tới khi bị expire, nên có thể đọc bảng tại bất kỳ snapshot nào (time travel). \textbf{Tag} đặt tên cho một snapshot quan trọng, chẳng hạn trạng thái chốt sổ cuối tháng. \textbf{Branch} cho phép ghi thử nghiệm trên một nhánh tách biệt. \textbf{Rollback} đưa con trỏ về snapshot cũ khi pipeline ghi sai.
+
+\begin{aivncodebox}[02\_silver\_lakehouse.py: time travel]
+\begin{python}
+tbl.manage_snapshots().create_tag(snap_jan, "after_jan_load").commit()
+as_of_jan = tbl.scan(snapshot_id=snap_jan).count()
+as_of_feb = tbl.scan(snapshot_id=snap_feb).count()
+\end{python}
+\end{aivncodebox}
+
+\begin{aivnCodeOutput}[Output]
+\begin{python}
+Snapshot 1 (tag after_jan_load): 2,998,337 dòng
+Snapshot 2 (trước khi DELETE)  : 5,848,646 dòng
+Hiện tại                       : 5,848,609 dòng
+tip_per_mile của các dòng tháng 01 (ghi trước khi có cột): [None, None, None]
+\end{python}
+\end{aivnCodeOutput}
+
+\subsection{Delta Lake và Apache Hudi}
+
+\textbf{Delta Lake} lưu trạng thái bảng trong thư mục \texttt{\_delta\_log/}, gồm các file JSON đánh số tuần tự (\texttt{00000000000000000000.json}, \texttt{\dots01.json},~\dots). Mỗi commit là một file JSON ghi các action thêm hoặc bỏ data file. Định kỳ, mặc định cứ 10 commit, log được gộp thành một checkpoint Parquet để reader không phải đọc hàng nghìn file JSON~\cite{delta2026protocol,armbrust2020delta}. Commit thành công khi writer tạo được file JSON mang số kế tiếp; nếu hai writer cùng tạo một số thì chỉ một bên thắng. Delta 4.1.0 (tháng 3/2026) bổ sung, ở dạng preview, bảng do catalog quản lý và server-side planning qua Iceberg REST API~\cite{delta2026release41}.
+
+\textbf{Apache Hudi} tổ chức metadata quanh một \textbf{timeline} ghi lại các action (commit, delta commit, compaction, clean) theo thời gian, có hai loại bảng CoW và MoR, và có index ở mức bản ghi giúp tìm nhanh file chứa một khóa cần upsert~\cite{hudi2026timeline}. Hudi phù hợp nhất với CDC và streaming upsert tần suất cao.
+
+\begin{figblock}\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|P{2.3cm}|L|L|L|}
+\hline
+\rowcolor{rowLavender}
+\textbf{Tiêu chí} & \textbf{Apache Iceberg} & \textbf{Delta Lake} & \textbf{Apache Hudi} \\
+\hline
+Nguồn gốc & Netflix; Apache Software Foundation & Databricks; Linux Foundation & Uber; Apache Software Foundation \\
+\hline
+Metadata & Cây: metadata.json $\rightarrow$ manifest list $\rightarrow$ manifest & Log JSON tuần tự + checkpoint Parquet & Timeline + metadata table, index \\
+\hline
+Commit & CAS con trỏ trong catalog & Tạo file log số kế tiếp & Theo timeline, có cơ chế khóa \\
+\hline
+Partition & Hidden partitioning, partition evolution & Partition kiểu Hive, Liquid Clustering & Partition kiểu Hive, clustering \\
+\hline
+Điểm mạnh & Nhiều engine, bảng rất lớn & Tích hợp sâu với Spark và Databricks & Upsert, CDC tần suất cao \\
+\hline
+\end{tabularx}
+\end{center}
+\tabcap{So sánh ba table format phổ biến.}{tab:formats3}
+\end{figblock}
+
+Khoảng cách tính năng giữa các format đang thu hẹp: Iceberg v3 có deletion vector giống Delta, Delta UniForm sinh thêm metadata Iceberg để client Iceberg đọc được bảng Delta, còn Apache XTable chuyển đổi metadata qua lại giữa cả ba format~\cite{xtable2026}. Vì vậy việc chọn format giờ phụ thuộc chủ yếu vào hệ sinh thái engine và catalog mà tổ chức đang dùng.
+
+\subsection{Catalog: lớp điều khiển của Lakehouse}
+
+Catalog đảm nhận bốn vai trò: giữ con trỏ metadata và thực hiện CAS, quản lý namespace (\texttt{database.table}), phân quyền, và là nơi để engine tìm ra bảng. Nếu catalog ngừng hoạt động, không engine nào đọc hay ghi được bảng. Vì thế catalog là hạ tầng cấp một, cần được vận hành với độ sẵn sàng cao như database chính.
+
+\textbf{Iceberg REST Catalog}~\cite{iceberg2026rest} chuẩn hóa giao tiếp giữa engine và catalog qua HTTP. Trước đó, mỗi engine cần một connector riêng cho từng loại catalog (Hive Metastore, AWS Glue, JDBC). Giao thức REST còn mở đường cho credential vending: thay vì cấp cho engine khóa truy cập dài hạn vào cả bucket, catalog chỉ cấp token ngắn hạn cho đúng prefix của bảng được phép đọc.
+
+\begin{figblock}\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|P{3.2cm}|L|}
+\hline
+\rowcolor{rowLavender}
+\textbf{Catalog} & \textbf{Đặc điểm} \\
+\hline
+Apache Polaris & Snowflake khởi tạo năm 2024, trở thành Top-Level Project của Apache đầu năm 2026~\cite{asf2026polaris}; triển khai đầy đủ REST, RBAC, credential vending \\
+\hline
+Unity Catalog & Trung tâm của nền tảng Databricks; bản mã nguồn mở có ít tính năng hơn bản managed~\cite{unitycatalog2026} \\
+\hline
+Lakekeeper & Iceberg REST catalog viết bằng Rust, lưu trạng thái trong PostgreSQL, phù hợp tự triển khai~\cite{lakekeeper2026} \\
+\hline
+Project Nessie & Branch và commit kiểu Git ở mức catalog, hỗ trợ giao dịch trên nhiều bảng~\cite{nessie2026} \\
+\hline
+Hive Metastore, AWS Glue & Thế hệ catalog trước, vẫn phổ biến trong các hệ thống hiện có \\
+\hline
+SQL catalog (SQLite, PostgreSQL) & Lưu con trỏ trong một bảng SQL; phần thực hành dùng SQLite, chỉ hợp cho học tập và thử nghiệm \\
+\hline
+\end{tabularx}
+\end{center}
+\tabcap{Một số catalog cho Iceberg và Delta Lake.}{tab:catalogs}
+\end{figblock}
+
+\begin{notebox}
+REST giúp di chuyển metadata của bảng giữa các catalog mà không phải chép file Parquet. Tuy vậy, chính sách phân quyền (role, row filter, column mask) không chuyển theo, vì mỗi catalog dùng một mô hình quyền riêng. Chọn catalog là một quyết định dài hạn.
+\end{notebox}
+
+\subsection{Bảo trì bảng (Day-2 operations)}
+
+Với Data Warehouse, vendor lo việc bảo trì. Với Lakehouse, đội dữ liệu phải tự làm bốn việc:
+
+\begin{enumerate}
+    \item \textbf{Compaction}: gộp file nhỏ do streaming hoặc micro-batch sinh ra.
+    \item \textbf{Expire snapshots}: xóa snapshot quá hạn lưu giữ. Đổi lại, không thể time travel về các snapshot đó nữa.
+    \item \textbf{Xóa orphan file}: dọn file không còn được tham chiếu, sinh ra từ job chết giữa chừng hoặc snapshot đã bị expire.
+    \item \textbf{Gọn metadata}: giới hạn số phiên bản \texttt{metadata.json} cũ được giữ lại qua thuộc tính \nolinkurl{write.metadata.previous-versions-max}, và gộp các manifest nhỏ bằng \texttt{rewrite\_manifests}.
+\end{enumerate}
+
+Script \texttt{04\_table\_maintenance.py} ghi 300 micro-batch, mỗi batch 1.000 dòng, rồi lần lượt thực hiện các bước trên. Kết quả đo được:
+
+\begin{figblock}\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\small
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\rowcolor{rowLavender}
+\textbf{Trạng thái} & \textbf{Snapshot} & \textbf{File cần đọc} & \textbf{Lập kế hoạch} & \textbf{metadata/} \\
+\hline
+Sau 300 micro-batch & 300 & 262 & 353 ms & 901 file, 43,9 MB \\
+\hline
+Sau compaction & 302 & 1 & 3 ms & 906 file, 44,4 MB \\
+\hline
+Sau expire snapshots & 1 & 1 & 2 ms & 907 file, 44,4 MB \\
+\hline
+Sau dọn dẹp metadata, orphan & 1 & 1 & 3 ms & 8 file, 1,0 MB \\
+\hline
+\end{tabular}
+\end{center}
+\tabcap{Ảnh hưởng của small files và hiệu quả bảo trì trên bảng 300.000 dòng. Thời gian đo trên laptop và thay đổi nhẹ giữa các lần chạy, nên chỉ có ý nghĩa so sánh tương đối.}{tab:maint}
+\end{figblock}
+
+Compaction giảm thời gian lập kế hoạch hơn 100 lần, nhưng không giảm dung lượng: các file cũ vẫn cần cho time travel. Chỉ sau khi expire snapshot và xóa orphan file, dung lượng mới được thu hồi. Hành vi này phụ thuộc công cụ: \texttt{expire\_snapshots} của PyIceberg 0.12 chỉ cập nhật metadata, còn procedure cùng tên của Spark xóa luôn các file chỉ thuộc snapshot đã expire. Trên môi trường production, các việc này thường chạy định kỳ bằng các procedure của Spark như \texttt{rewrite\_data\_files}, \texttt{expire\_snapshots}, \texttt{remove\_orphan\_files}, hoặc giao cho catalog tự động hóa.
+
+% ============================================================================
+\section{So sánh và kết hợp ba kiến trúc}
+\label{sec:hybrid}
+% ============================================================================
+
+\subsection{Bảng so sánh tổng hợp}
+
+\begin{figblock}\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|P{2.6cm}|L|L|L|}
+\hline
+\rowcolor{rowLavender}
+\textbf{Tiêu chí} & \textbf{Data Warehouse} & \textbf{Data Lake} & \textbf{Data Lakehouse} \\
+\hline
+Sở hữu bảng & Vendor sở hữu cả ba lớp & Không ai & Table format mở + catalog \\
+\hline
+Storage & Do vendor quản lý, ẩn với người dùng & Object storage, HDFS & Object storage, chủ yếu Parquet \\
+\hline
+Schema & Schema-on-write & Schema-on-read & Áp khi ghi, tiến hóa qua metadata \\
+\hline
+Loại dữ liệu & Có cấu trúc & Mọi loại, kể cả ảnh, âm thanh & Có cấu trúc và bán cấu trúc \\
+\hline
+ACID & Có sẵn & Không & Có, nhờ commit nguyên tử \\
+\hline
+UPDATE / DELETE & SQL thông thường & Ghi lại cả file hoặc partition & CoW hoặc MoR \\
+\hline
+Time travel & Có, giới hạn theo gói dịch vụ & Không & Có, theo snapshot \\
+\hline
+Engine truy cập & Engine của vendor & Mọi engine, qua file & Nhiều engine, qua catalog \\
+\hline
+Vận hành & Vendor tự động hóa & Script thủ công & Đội dữ liệu tự bảo trì bảng \\
+\hline
+\end{tabularx}
+\end{center}
+\tabcap{So sánh Data Warehouse, Data Lake và Data Lakehouse.}{tab:compare}
+\end{figblock}
+
+\subsection{Kiến trúc lai trong thực tế}
+
+Một sai lầm phổ biến là nghĩ phải chọn duy nhất một trong ba kiến trúc. Nền tảng thực tế thường dùng cả ba, mỗi kiến trúc đảm nhận một vùng trong vòng đời dữ liệu (Hình~\ref{fig:hybrid}):
+
+\begin{itemize}
+    \item \textbf{Vùng thô là Data Lake}: dữ liệu CDC, file từ đối tác, log sự kiện được giữ nguyên dạng. Vì chưa bị biến đổi, vùng này là kho lưu trữ gốc để chạy lại pipeline khi phát hiện lỗi logic ở phía sau.
+    \item \textbf{Vùng lõi là Data Lakehouse}: Spark, Flink hay PyIceberg làm sạch dữ liệu thô thành bảng Iceberg hoặc Delta. Đây là bản dữ liệu duy nhất được dùng chung cho ETL, SQL ad-hoc và pipeline feature của ML.
+    \item \textbf{Vùng phục vụ là Data Warehouse}: dashboard, báo cáo cần độ trễ thấp và nhiều người dùng đồng thời. Dữ liệu Gold có thể được nạp vào warehouse, hoặc warehouse đọc thẳng bảng Iceberg mà không cần chép.
+\end{itemize}
+
+\begin{figblock}\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tikzpicture}[
+  zone/.style={draw=#1, line width=1.1pt, fill=#1!12, rounded corners=4pt, align=center,
+               font=\footnotesize, text width=3.3cm, minimum height=2.3cm},
+  tool/.style={draw=gray!60, fill=white, rounded corners=2pt, align=center,
+               font=\scriptsize\ttfamily, text width=3.9cm, minimum height=0.6cm},
+  ext/.style={draw=gray, fill=gray!8, rounded corners=3pt, align=center, font=\footnotesize, text width=2.2cm, minimum height=1.3cm},
+  arr/.style={-{Stealth[length=2.6mm]}, line width=1pt, gray!70!black}]
+  \node[ext] (src) at (0,0) {\textbf{Nguồn}\\NYC TLC, CDC, log, API};
+  \node[zone=bronzeC] (b) at (3.6,0) {\textbf{Bronze}\\[2pt]\textit{Data Lake}\\[2pt]file nguyên dạng, append-only};
+  \node[zone=silverC] (s) at (7.7,0) {\textbf{Silver}\\[2pt]\textit{Data Lakehouse}\\[2pt]bảng Iceberg đã chuẩn hóa, có ACID};
+  \node[zone=goldC] (g) at (11.8,0) {\textbf{Gold}\\[2pt]\textit{Data Warehouse}\\[2pt]star schema, data mart};
+  \node[ext] (bi) at (15.3,0) {\textbf{BI}\\dashboard};
+  \node[ext] (ml) at (15.3,2.4) {\textbf{ML}\\feature};
+  \draw[arr] (src) -- (b);  \draw[arr] (b) -- (s);  \draw[arr] (s) -- (g);
+  \draw[arr] (g) -- (bi);  \draw[arr] (s.north) to[out=50, in=180] (ml.west);
+  \node[tool] at (3.6,-1.75) {Lab: thư mục Parquet\\year=/month=};
+  \node[tool] at (7.7,-1.75) {Lab: PyIceberg\\+ SQLite catalog};
+  \node[tool] at (11.8,-1.75) {Lab: DuckDB};
+  \node[tool, draw=none, fill=none] at (3.6,-2.55) {01\_bronze\_data\_lake.py};
+  \node[tool, draw=none, fill=none] at (7.7,-2.55) {02\_silver\_lakehouse.py\\04\_table\_maintenance.py};
+  \node[tool, draw=none, fill=none] at (11.8,-2.55) {03\_gold\_warehouse.py};
+\end{tikzpicture}
+\end{adjustbox}
+\end{center}
+\figcap{Kiến trúc lai theo mô hình Medallion. Dòng dưới cùng là công cụ và script tương ứng trong phần thực hành.}{fig:hybrid}
+\end{figblock}
+
+\subsection{Medallion và mô hình hóa dữ liệu}
+
+Table format bảo đảm bảng \texttt{orders} được commit nguyên tử, nhưng không định nghĩa thế nào là ``doanh thu thuần'' hay ``khách hàng đang hoạt động''. Medallion architecture tổ chức dữ liệu theo mức độ tinh chỉnh qua ba lớp Bronze, Silver, Gold~\cite{databricks2026medallion}. Đây là cách tổ chức logic chứ không thay thế mô hình hóa dữ liệu. Mỗi lớp nên dùng phương pháp mô hình hóa phù hợp với vai trò của nó (Bảng~\ref{tab:medallion}).
+
+\begin{figblock}\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|P{1.6cm}|L|L|L|}
+\hline
+\rowcolor{rowLavender}
+\textbf{Lớp} & \textbf{Vai trò} & \textbf{Mô hình hóa} & \textbf{Thao tác chính} \\
+\hline
+Bronze & Lưu trữ gốc, không sửa & Giữ nguyên schema nguồn, thêm cột như \texttt{\_ingested\_at}, \texttt{\_source} & Chỉ append, không lọc theo nghiệp vụ \\
+\hline
+Silver & Thực thể nghiệp vụ đã làm sạch & 3NF kiểu Inmon hoặc Data Vault 2.0 & Chuẩn hóa schema, ép kiểu, khử trùng lặp, SCD Type 2 \\
+\hline
+Gold & Dữ liệu sẵn sàng sử dụng & Star schema kiểu Kimball, hoặc One Big Table (OBT) & Tính metric, tổng hợp, mô tả ý nghĩa cột cho BI và AI \\
+\hline
+\end{tabularx}
+\end{center}
+\tabcap{Ánh xạ lớp Medallion với phương pháp mô hình hóa.}{tab:medallion}
+\end{figblock}
+
+Ở lớp Gold, star schema phù hợp khi người dùng chính là nhà phân tích và công cụ BI. One Big Table (một bảng rộng đã \texttt{JOIN} sẵn mọi dimension) phù hợp khi cần quét nhanh một bảng duy nhất, ví dụ để tạo feature cho ML.
+
+\subsection{Khi nào chọn kiến trúc nào}
+
+\begin{guidelinebox}{Gợi ý lựa chọn}
+\begin{itemize}
+    \item \textbf{Chỉ cần Data Warehouse} khi người dùng chủ yếu là nhà phân tích SQL, dữ liệu có cấu trúc và đội ngũ nhỏ, muốn ít việc vận hành.
+    \item \textbf{Luôn giữ một vùng Data Lake} để lưu dữ liệu thô, đa dạng và đến nhanh trước khi xử lý.
+    \item \textbf{Dùng Data Lakehouse} khi phải phục vụ cùng lúc ETL theo lô, streaming, SQL ad-hoc và ML trên một bản dữ liệu duy nhất mà không muốn trả giá cho kiến trúc hai tầng.
+    \item \textbf{Chọn table format theo hệ sinh thái}: Delta Lake nếu đã gắn chặt với Databricks; Iceberg cùng một REST catalog mở như Polaris hay Lakekeeper nếu cần nhiều engine (Spark, Trino, Flink, DuckDB) hoặc SDK ngoài JVM như PyIceberg.
+\end{itemize}
+\end{guidelinebox}
+
+% ============================================================================
+\section{Thực hành: NYC Yellow Taxi từ Bronze đến Gold}
+\label{sec:lab}
+% ============================================================================
+
+\subsection{Môi trường và dữ liệu}
+
+Phần thực hành chạy hoàn toàn trên laptop, không cần Docker hay tài khoản cloud. Kiến trúc tổng thể là Hình~\ref{fig:hybrid}. Bảng~\ref{tab:labtools} liệt kê công cụ cho từng lớp.
+
+\begin{figblock}\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\linewidth}{|P{1.5cm}|P{2.7cm}|L|P{5.4cm}|}
+\hline
+\rowcolor{rowLavender}
+\textbf{Lớp} & \textbf{Kiến trúc} & \textbf{Công cụ} & \textbf{Script} \\
+\hline
+Bronze & Data Lake & Thư mục Parquet, PyArrow, DuckDB & \texttt{01\_bronze\_data\_lake.py} \\
+\hline
+Silver & Data Lakehouse & PyIceberg 0.12, SQLite catalog & \texttt{02\_silver\_lakehouse.py}, \texttt{04\_table\_maintenance.py} \\
+\hline
+Gold & Data Warehouse & DuckDB 1.5 + extension \texttt{iceberg} & \texttt{03\_gold\_warehouse.py} \\
+\hline
+\end{tabularx}
+\end{center}
+\tabcap{Công cụ và script của phần thực hành.}{tab:labtools}
+\end{figblock}
+
+Các API của PyIceberg dùng trong bài được mô tả trong tài liệu chính thức~\cite{pyiceberg2026docs}.
+
+Dữ liệu là chuyến taxi vàng tháng 1 và tháng 2 năm 2023 do NYC TLC công bố~\cite{tlc2026data}, mỗi tháng một file Parquet khoảng 48 MB và khoảng 3 triệu dòng. Script tự tải dữ liệu ở lần chạy đầu. Các lệnh cài đặt (Python 3.10 trở lên):
+
+\begin{aivncodebox}[Cài đặt và chạy]
+\begin{python}[language=bash]
+cd solution/code
+python3 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
+python 01_bronze_data_lake.py      # Bronze: Data Lake và các lỗi data swamp
+python 02_silver_lakehouse.py      # Silver: bảng Iceberg, evolution, time travel
+python 03_gold_warehouse.py        # Gold: star schema và data mart trên DuckDB
+python 04_table_maintenance.py     # Mở rộng: small files và bảo trì bảng
+\end{python}
+\end{aivncodebox}
+
+Output của lớp Bronze đã được trình bày trong mục~\ref{sec:lake}, nên phần dưới chỉ tập trung vào hai bước còn lại.
+
+\subsection{Silver: chuẩn hóa schema và nạp vào Iceberg}
+
+Bước quan trọng nhất của Silver là đưa dữ liệu các tháng về \textbf{một schema đích} trước khi ghi. Hàm \texttt{conform} đổi tên cột về chữ thường (xử lý luôn \texttt{airport\_fee} và \texttt{Airport\_fee}), ép kiểu theo \texttt{SILVER\_SCHEMA}, rồi áp bốn quy tắc chất lượng dữ liệu:
+
+\begin{aivncodebox}[02\_silver\_lakehouse.py: hàm conform]
+\begin{python}
+def conform(ym: str) -> pa.Table:
+    raw = pq.read_table(bronze_file(ym))
+    # Tháng 01 có cột airport_fee, tháng 02 lại là Airport_fee
+    raw = raw.rename_columns([RENAME.get(c.lower(), c.lower())
+                              for c in raw.column_names])
+    tbl = raw.select(SILVER_SCHEMA.names).cast(SILVER_SCHEMA)
+
+    year, month = map(int, ym.split("-"))
+    next_month = datetime(year + month // 12, month % 12 + 1, 1)
+    start = pa.scalar(datetime(year, month, 1), pa.timestamp("us"))
+    end = pa.scalar(next_month, pa.timestamp("us"))
+    rules = {
+        "pickup ngoài tháng": pc.or_(pc.less(tbl["pickup_at"], start),
+                                     pc.greater_equal(tbl["pickup_at"], end)),
+        "trip_distance <= 0": pc.less_equal(tbl["trip_distance"], 0),
+        "fare_amount <= 0": pc.less_equal(tbl["fare_amount"], 0),
+        "dropoff trước pickup": pc.less(tbl["dropoff_at"], tbl["pickup_at"]),
+    }
+    bad = pc.or_(pc.or_(rules["pickup ngoài tháng"], rules["trip_distance <= 0"]),
+                 pc.or_(rules["fare_amount <= 0"], rules["dropoff trước pickup"]))
+    return tbl.filter(pc.invert(bad))
+\end{python}
+\end{aivncodebox}
+
+\begin{aivnCodeOutput}[Output]
+\begin{python}
+2023-01: Bronze 3,066,766 dòng -> Silver 2,998,337 dòng
+    loại vì pickup ngoài tháng    :      48
+    loại vì trip_distance <= 0    :  45,862
+    loại vì fare_amount <= 0      :  26,159
+    loại vì dropoff trước pickup  :       3
+\end{python}
+\end{aivnCodeOutput}
+
+Một dòng có thể vi phạm nhiều quy tắc cùng lúc, nên tổng các con số bên trên lớn hơn số dòng thực sự bị loại. Tạo bảng và ghi dữ liệu chỉ cần hai lệnh; catalog SQLite ghi lại con trỏ tới \texttt{metadata.json}:
+
+\begin{aivncodebox}[02\_silver\_lakehouse.py: tạo bảng và commit snapshot đầu tiên]
+\begin{python}
+catalog = load_lab_catalog()       # SqlCatalog: SQLite giữ con trỏ, file nằm trên đĩa
+catalog.create_namespace_if_not_exists("silver")
+tbl = catalog.create_table("silver.yellow_trips", schema=SILVER_SCHEMA)
+tbl.append(conform("2023-01"))     # snapshot 1
+\end{python}
+\end{aivncodebox}
+
+Khi thử ghi một batch có \texttt{vendor\_id} kiểu chuỗi, PyIceberg từ chối ngay từ phía client với lỗi \texttt{Mismatch in fields}, và snapshot hiện hành giữ nguyên. Cùng một batch sai đó, ở lớp Bronze đã làm hỏng mọi truy vấn trên prefix.
+
+\subsection{Gold: Star Schema với DuckDB}
+
+DuckDB đọc bảng Silver qua \texttt{iceberg\_scan} trên file \texttt{metadata.json} hiện hành, nên chỉ thấy đúng các file thuộc snapshot hiện tại, không bao giờ thấy file rác hay file đã bị xóa. Fact table được tạo như sau:
+
+\begin{aivncodebox}[03\_gold\_warehouse.py: fact table với grain một chuyến xe]
+\begin{python}[language=SQL]
+CREATE OR REPLACE TABLE fact_trips AS
+SELECT
+    row_number() OVER (ORDER BY pickup_at)          AS trip_key,
+    vendor_id                                       AS vendor_key,
+    payment_type                                    AS payment_type_key,
+    CAST(strftime(pickup_at, '%Y%m%d') AS INTEGER)  AS pickup_date_key,
+    pu_location_id, do_location_id, passenger_count, trip_distance,
+    date_diff('minute', pickup_at, dropoff_at)      AS duration_min,
+    fare_amount, tip_amount, total_amount,
+    coalesce(tip_per_mile, tip_amount / trip_distance) AS tip_per_mile
+FROM iceberg_scan('<đường dẫn metadata.json hiện hành>');
+\end{python}
+\end{aivncodebox}
+
+Biểu thức \texttt{coalesce} xử lý hệ quả của schema evolution: file tháng 1 không có \texttt{tip\_per\_mile} nên được tính lại tại chỗ. Trước khi tạo data mart, script chạy các kiểm tra chất lượng dữ liệu:
+
+\begin{aivnCodeOutput}[Output: kiểm tra chất lượng dữ liệu]
+\begin{python}
+  [PASS] Số dòng fact = số dòng Silver
+  [PASS] Không có vendor_key mồ côi
+  [PASS] Không có payment_type_key mồ côi
+  [PASS] Không có pickup_date_key mồ côi
+  [PASS] trip_key là duy nhất
+
+Nếu dim_payment_type thiếu mã 0, INNER JOIN sẽ âm thầm làm mất 135,947 chuyến.
+\end{python}
+\end{aivnCodeOutput}
+
+\begin{notebox}
+Nhiều tài liệu cũ chỉ liệt kê mã thanh toán từ 1 đến 6. Data dictionary năm 2025 của NYC TLC bổ sung mã 0 là \textit{Flex Fare trip}~\cite{tlc2025dictionary}, và dữ liệu hai tháng đầu năm 2023 có 135.947 chuyến mang mã này. Dimension thiếu mã 0 khiến \texttt{INNER JOIN} lặng lẽ loại các chuyến đó, và doanh thu trên dashboard bị thấp hơn thực tế mà không có lỗi nào được báo. Kiểm tra khóa ngoại mồ côi phát hiện được lỗi này.
+\end{notebox}
+
+Data mart cuối cùng tổng hợp doanh thu theo ngày và theo hãng, chỉ tính các hình thức thanh toán có phát sinh doanh thu:
+
+\begin{aivnCodeOutput}[Output: 4 dòng đầu của mart\_daily\_vendor\_revenue]
+\begin{python}
++------------+----------------------+-------+---------------+------------------+
+| full_date  |        vendor        | trips | gross_revenue | avg_duration_min |
++------------+----------------------+-------+---------------+------------------+
+| 2023-01-01 | Creative Mobile Tech | 17915 |      505093.0 |             14.9 |
+| 2023-01-01 | Curb Mobility, LLC   | 55744 |    1778793.76 |             18.4 |
+| 2023-01-02 | Creative Mobile Tech | 16569 |     480764.08 |             14.3 |
+| 2023-01-02 | Curb Mobility, LLC   | 46662 |    1509729.55 |             17.1 |
++------------+----------------------+-------+---------------+------------------+
+\end{python}
+\end{aivnCodeOutput}
+
+\subsection{Hướng mở rộng}
+
+Bộ code dùng ổ đĩa cục bộ và catalog SQLite để chạy được ở mọi máy. Để tiến gần môi trường production, bạn có thể lần lượt:
+
+\begin{enumerate}
+    \item Thay thư mục cục bộ bằng \textbf{MinIO} (object storage tương thích S3) chạy bằng Docker, rồi cấu hình PyIceberg ghi lên bucket.
+    \item Thay SQLite bằng một \textbf{Iceberg REST catalog} như Lakekeeper hoặc Apache Polaris; khi đó \texttt{load\_catalog} nhận \texttt{type="rest"} cùng địa chỉ endpoint của catalog.
+    \item Cho \textbf{Trino} hoặc \textbf{Spark} cùng đọc bảng mà PyIceberg đã ghi để kiểm chứng tính đa engine. DuckDB cũng ghi được vào bảng Iceberg khi được \texttt{ATTACH} tới một REST catalog; \texttt{iceberg\_scan} trên file metadata như trong bài chỉ cho phép đọc~\cite{duckdb2026iceberg}.
+\end{enumerate}
+
+% ============================================================================
+\section{Lộ trình học tiếp}
+% ============================================================================
+
+Để đi từ mức hiểu khái niệm tới mức vận hành được hệ thống thật, có thể học theo năm giai đoạn trong khoảng 16 tuần (Bảng~\ref{tab:roadmap}), đi từ lớp lưu trữ vật lý lên tới kiến trúc lai hoàn chỉnh.
+
+\begin{figblock}\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|P{2.3cm}|L|P{3.6cm}|L|}
+\hline
+\rowcolor{rowLavender}
+\textbf{Giai đoạn} & \textbf{Kiến thức trọng tâm} & \textbf{Công cụ} & \textbf{Sản phẩm kiểm chứng} \\
+\hline
+1. Data Warehouse (tuần 1--3) & Row và columnar, Parquet, schema-on-write, star schema, SCD Type 2 & DuckDB, dbt, PyArrow & Star schema trong DuckDB + dbt, có test và SCD2 \\
+\hline
+2. Data Lake (tuần 4--6) & Object storage, schema-on-read, partition kiểu Hive, small files & MinIO, PySpark & Tái hiện partial write và schema drift trên MinIO \\
+\hline
+3. Lakehouse (tuần 7--10) & Cây metadata, CAS commit, CoW và MoR, hidden partitioning, time travel & PyIceberg, Spark, Delta Lake & Pipeline Silver có schema evolution, partition evolution, time travel \\
+\hline
+4. Catalog (tuần 11--13) & REST catalog, credential vending, RBAC, đa engine & Polaris hoặc Lakekeeper, Trino, DuckDB & PyIceberg ghi, Trino và DuckDB cùng đọc qua REST catalog \\
+\hline
+5. Kiến trúc lai (tuần 14--16) & Hợp đồng Bronze/Silver/Gold, compaction, expire snapshots, orphan files & MinIO, Polaris, Spark, DuckDB, dbt & Nền tảng Medallion có lịch bảo trì và số đo trước/sau \\
+\hline
+\end{tabularx}
+\end{center}
+\tabcap{Lộ trình 16 tuần sau bài học.}{tab:roadmap}
+\end{figblock}
+
+% ============================================================================
+\section{Tổng kết}
+% ============================================================================
+
+\begin{itemize}
+    \item Data Warehouse, Data Lake và Data Lakehouse khác nhau ở chỗ ai sở hữu khái niệm ``bảng'': vendor, không ai, hay một table format mở cùng catalog.
+    \item Data Warehouse cho SQL nhanh, ACID và vận hành tự động, đổi lại chi phí cao và dữ liệu bị khóa trong định dạng riêng.
+    \item Data Lake rẻ và linh hoạt, nhưng thiếu schema enforcement, commit nguyên tử và DELETE, nên dễ thành data swamp. Ngay dữ liệu NYC TLC cũng đổi schema giữa hai tháng liên tiếp.
+    \item Lakehouse giữ file Parquet trên object storage và thêm cây metadata cùng commit bằng CAS, nhờ đó có ACID, schema evolution, partition evolution và time travel.
+    \item Catalog là lớp điều khiển của Lakehouse, còn việc bảo trì bảng (compaction, expire snapshots, dọn orphan file) chuyển sang trách nhiệm của đội dữ liệu.
+    \item Nền tảng thực tế kết hợp cả ba kiến trúc theo Medallion: Data Lake cho Bronze, Lakehouse cho Silver, Warehouse cho Gold. Mô hình hóa dữ liệu (3NF, Data Vault, star schema) vẫn là việc riêng của từng lớp.
+\end{itemize}
+
+% ============================================================================
+\glsaddall
+\printnoidxglossary[style=clean3col, sort=def, title={Bảng thuật ngữ}, toctitle={Bảng thuật ngữ}]
+
+\section{Tài liệu tham khảo}
+\printbibliography[heading=none]
+
+\end{document}

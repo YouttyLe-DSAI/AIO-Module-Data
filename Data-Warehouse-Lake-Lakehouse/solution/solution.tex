@@ -1,0 +1,823 @@
+\documentclass[12pt]{article}
+\usepackage{makecell}
+\usepackage{hyphenat}
+\usepackage[utf8]{vietnam}
+\usepackage[vietnamese=nohyphenation]{hyphsubst}
+\usepackage[vietnamese]{babel}
+\usepackage[table,dvipsnames]{xcolor} % Required for row coloring
+\usepackage{booktabs} % Required for nicer horizontal lines
+\usepackage{ragged2e}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage[inline,shortlabels]{enumitem}
+\usepackage{setspace}
+\usepackage{longtable}
+\usepackage{bm} 
+\usepackage[inkscapelatex=false]{svg}
+\usepackage{titling}
+\usepackage{tabularx}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,mathrsfs}
+% \usepackage[draft]{hyperref}
+\usepackage{hyperref}
+\usepackage{xparse}
+\usepackage{fontawesome5}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{matrix, fit, shadows, positioning, arrows.meta, calc, shapes.geometric, backgrounds, shapes.symbols}
+\usepackage{paracol}
+\usepackage{bbm}
+\usepackage{pgfplots}
+\usepackage{siunitx}
+\usepackage{multirow}
+%  biblatex (thay cho IEEEtran.bst) ------------------------------------
+\usepackage[
+    backend=bibtex,
+    style=ieee,
+    citestyle=numeric-comp,
+    maxnames=1,     % chỉ hiển thị 1 tên tác giả, phần còn lại thành ``et al."
+    minnames=1,
+    uniquelist=false,
+    hyperref=false
+]{biblatex}
+\usepackage{forest}
+\addbibresource{references.bib}
+\DefineBibliographyStrings{english}{
+  andothers = {et\addabbrvspace al\adddot}
+}
+\AtBeginBibliography{\selectlanguage{english}}
+
+% -----------------------------------------------------------------
+\AtBeginDocument{\renewcommand\refname{}}
+
+\usepackage[toc,page]{appendix}
+\renewcommand{\appendixtocname}{Phụ lục}      
+\renewcommand{\appendixpagename}{Phụ lục}
+
+\usepackage{xurl}
+\setlength{\headheight}{14.5pt}
+\setlength{\topmargin}{-.5in} \setlength{\textheight}{9.25in}
+\setlength{\oddsidemargin}{-0.1in} \setlength{\textwidth}{6.8in}
+
+\usepackage{tocloft}
+\renewcommand{\cfttoctitlefont}{\Huge\bfseries}
+\setlength{\cftaftertoctitleskip}{2em}
+\setlength{\cftbeforesubsecskip}{7pt} % giãn cách subitem mục lục
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftsecnumwidth}{3em}
+\renewcommand{\cftsecaftersnum}{\quad}
+\renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftsubsecnumwidth}{4em}
+\renewcommand{\cftsubsecaftersnum}{\quad}
+\renewcommand{\cftsubsubsecleader}{\cftdotfill{\cftdotsep}}
+\setlength   {\cftsubsubsecnumwidth}{5em}  
+\renewcommand{\cftsubsubsecaftersnum}{\quad}
+
+\PassOptionsToPackage{vietnamese.licr}{babel}
+\usepackage{vipythonhighlight}
+\usepackage{tvietlistings}
+\newcounter{mycounter}
+\newcommand\showmycounter{\stepcounter{mycounter}\themycounter}
+\usepackage{lipsum}
+\newcommand\showlips{\stepcounter{mycounter}\lipsum[\value{mycounter}]}
+
+%--------------------------------------------------------------------
+\usepackage{framed}
+\usepackage{fancyhdr}
+\usepackage{upquote}
+\usepackage{listings}	 
+	    
+
+\usepackage[toc, nonumberlist, style=super]{glossaries}
+\makenoidxglossaries
+
+\newglossarystyle{clean3col}{%
+    % 1) Table layout: 3 columns
+    \renewenvironment{theglossary}%
+    {%
+      \begin{longtable}{@{}
+        >{\setlength{\parindent}{0pt}\RaggedRight\arraybackslash}p{0.2\linewidth}
+        >{\setlength{\parindent}{0pt}\RaggedRight\arraybackslash}p{0.23\linewidth}
+        >{\setlength{\parindent}{0pt}\RaggedRight\arraybackslash}p{0.52\linewidth}
+      @{}}%
+    }%
+    {\end{longtable}}%
+
+    % 2) Header row
+    \renewcommand{\glossaryheader}{%
+        \bfseries Thuật ngữ &
+        \bfseries Tạm dịch &
+        \bfseries Mô tả \\
+        \midrule
+        \endhead
+    }%
+
+    % 3) Each entry row
+    \renewcommand{\glossentry}[2]{%
+        \itshape \glstarget{##1}{\glossentryname{##1}} &
+        \glsentryuseri{##1} &
+        \glossentrydesc{##1} \\
+        \addlinespace[6pt]
+    }%
+}
+
+
+% Color --------------------------------------------------------------------
+\usepackage{epigraph}
+\usepackage{titlesec}
+
+\definecolor{codebackground}{RGB}{250, 250, 250}
+\definecolor{codecomment}{RGB}{34, 139, 34}
+\definecolor{codekeyword}{RGB}{0, 0, 255}
+\definecolor{codestring}{RGB}{255, 0, 0}
+\definecolor{codeidentifier}{RGB}{0, 0, 0}
+\definecolor{codelinenumbers}{RGB}{90, 90, 90}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\definecolor{aivnGreen}{RGB}{52,79,30}  
+\definecolor{aivnCodeOutputColor}{RGB}{11,83,148}  
+\definecolor{captiongray}{gray}{0.15} 
+\definecolor{captionbg}{RGB}{250,250,250}
+
+\definecolor{foldercolor}{RGB}{0, 102, 204}
+\definecolor{filecolor}{RGB}{104, 104, 104}
+\definecolor{scriptcolor}{RGB}{180, 50, 50}
+\definecolor{pythoncolor}{RGB}{0, 128, 128}
+
+% --- Extra Brand colors for the table ---
+\definecolor{brandIndigo}{HTML}{333D91} 
+\definecolor{rowLavender}{HTML}{EEECFA}
+\setlength{\parskip}{0.3em}
+
+% Table
+\newtcolorbox{captionbelowboxaivn}{
+    colback=aivnGreen,
+    colframe=aivnGreen,
+    boxrule=0pt,
+    arc=4pt,
+    left=4pt,
+    right=4pt,
+    top=2pt,
+    bottom=2pt,
+    width=\linewidth,
+    boxsep=4pt,
+    halign=center,
+    % fontupper=\bfseries\color{white}
+    fontupper=\color{white}
+}
+
+% Figure
+\newtcolorbox{figurecardcaptionaivn}{
+  colback=aivnGreen,        % Màu nền (background color)
+  colframe=aivnGreen,       % Màu viền box (border color)
+  boxrule=0pt,              % Độ dày viền box (0pt = không viền)
+  arc=2pt,                  % Độ bo góc (2pt là bo nhẹ, tăng để bo tròn hơn)
+  top=3pt,                  % Padding phía trên nội dung
+  bottom=3pt,               % Padding phía dưới nội dung
+  left=10pt,                % Padding bên trái
+  right=10pt,               % Padding bên phải
+  width=\linewidth,         % Chiều rộng bằng toàn bộ dòng
+  fontupper=\small\fontsize{11pt}{13pt}\selectfont\color{white} 
+}
+
+% Tạo counter riêng
+\newcounter{hinh}
+% Định nghĩa macro caption Hình
+\newcommand{\capfig}[1]{%
+  \refstepcounter{hinh}%
+  % \textbf{Hình~\thehinh:}~#1
+    Hình~\thehinh:~#1
+}
+
+\newtcolorbox{figurecaptionmodern}{
+  colback=captionbg,
+  colframe=aivnGreen,
+  boxrule=1.5pt,
+  bottomrule=2pt,  
+  toptitle=0pt,
+  bottomtitle=0pt,
+  left=6pt,
+  right=6pt,
+  top=4pt,
+  bottom=2pt,
+  width=\linewidth,
+  fontupper=\small\fontsize{11pt}{13pt}\selectfont\color{black},
+  halign=center
+}
+
+% Code Block -----------------------------------------------------------------
+\newtcolorbox{aivncodebox}[1][]{%
+  enhanced,
+  colback=gray!10,
+  colframe=aivnGreen,
+  coltitle=white,
+  colbacktitle=aivnGreen,
+  title=#1,
+  fonttitle=\bfseries\sffamily,
+  listing only,
+  breakable,
+  listing engine=listings,
+  listing options={
+    language=Python,
+    basicstyle=\ttfamily\footnotesize,
+    commentstyle=\color{ForestGreen},
+    keywordstyle=\color{blue},
+    stringstyle=\color{red!70!black},
+    numbers=left, upquote=true,
+    numberstyle=\tiny\color{gray},
+    numbersep=5pt,
+    breaklines=true,
+    showstringspaces=false,
+    xleftmargin=1.5em,
+    framexleftmargin=1.5em
+  }
+}
+
+% Code Output Block -----------------------------------------------------------------
+\newtcolorbox{aivnCodeOutput}[1][]{%
+  enhanced,
+  colback=gray!10,
+  colframe=aivnCodeOutputColor,
+  coltitle=white,
+  colbacktitle=aivnCodeOutputColor,
+  title=#1,
+  fonttitle=\bfseries\sffamily,
+  listing only,
+  breakable,
+  listing engine=listings,
+  listing options={
+    language=Python,
+    basicstyle=\ttfamily\footnotesize,
+    commentstyle=\color{ForestGreen},
+    keywordstyle=\color{blue},
+    stringstyle=\color{red!70!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=5pt,
+    breaklines=true,
+    showstringspaces=false,
+    xleftmargin=1.5em,
+    framexleftmargin=1.5em
+  }
+}
+
+% Last argument allows more tcolorbox options to be added
+
+% --- Guideline/Tip box ---
+\newtcolorbox{guidelinebox}[2][]{
+    enhanced, colback=yellow!10!white, colframe=orange!90!black, boxrule=1pt, arc=4pt,
+    fonttitle=\bfseries, attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    colbacktitle=orange!90!black, coltitle=white,
+    title=\faLightbulb\hspace{1mm} #2, #1
+}
+
+\newtcolorbox{notebox}[1][]{
+  enhanced,  colback=yellow!10, colframe=orange!80, boxrule=1pt, 
+  arc=4pt, fontupper=\small, attach boxed title to top left={yshift=-2mm, xshift=3mm},
+  colbacktitle=orange!80,  coltitle=white, fonttitle=\bfseries,  
+  title=\faInfoCircle~\textbf{Lưu ý},  #1
+}
+
+\newtcolorbox{infobox}[1]{%
+    enhanced, 
+    breakable, 
+    colback=green!3, 
+    colframe=green!3, 
+    arc=5pt,
+    borderline west={3pt}{0pt}{aivnGreen},
+    attach boxed title to top left={ 
+        yshift*=-\tcboxedtitleheight/2, 
+        xshift=-0.1em 
+    },
+    colbacktitle=aivnGreen, %
+    coltitle=white, 
+    fonttitle=\bfseries, 
+    boxed title style={ 
+        arc=4pt, 
+        top=2pt, 
+        bottom=2pt,
+        left=8pt,
+        right=8pt,
+    },
+    title={\faInfoCircle\quad #1}
+}
+\newtcolorbox{examplebox}[1]{%
+    enhanced,
+    breakable,
+    colback=brandIndigo!5,      
+    colframe=brandIndigo!5,     
+    arc=5pt,
+    borderline west={3pt}{0pt}{brandIndigo}, 
+    attach boxed title to top left={
+        yshift*=-\tcboxedtitleheight/2,
+        xshift=-0.1em
+    },
+    colbacktitle=brandIndigo,   
+    coltitle=white,
+    fonttitle=\bfseries,
+    boxed title style={
+        arc=4pt,
+        top=2pt,
+        bottom=2pt,
+        left=8pt,
+        right=8pt,
+    },
+    title={\faLightbulb\quad #1} 
+}
+% Prompt Block ---------------------------------------------------------------
+\definecolor{promptBlue}{HTML}{2F5D8C}
+\definecolor{promptBg}{HTML}{F6F9FC}
+\definecolor{promptBorder}{HTML}{B7C9DC}
+
+% Dùng cho prompt đã viết theo cú pháp LaTeX bình thường
+\newtcolorbox{promptbox}[1][Prompt]{%
+    enhanced,
+    breakable,
+    colback=promptBg,
+    colframe=promptBorder,
+    coltitle=white,
+    colbacktitle=promptBlue,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    boxrule=0.8pt,
+    arc=4pt,
+    left=8pt,
+    right=8pt,
+    top=2pt,
+    bottom=1pt,
+    before skip=8pt,
+    after skip=8pt,
+    borderline west={3pt}{0pt}{promptBlue},
+    fontupper=\small\sffamily,
+}
+
+% Dùng cho prompt raw: giữ nguyên xuống dòng, không highlight keyword
+\newtcblisting{promptboxraw}[1][Prompt]{%
+    enhanced,
+    breakable,
+    listing only,
+    listing engine=listings,
+    colback=promptBg,
+    colframe=promptBorder,
+    coltitle=white,
+    colbacktitle=promptBlue,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    boxrule=0.8pt,
+    arc=4pt,
+    left=8pt,
+    right=8pt,
+    top=-4pt,
+    bottom=-4pt,
+    before skip=4pt,
+    after skip=4pt,
+    borderline west={3pt}{0pt}{promptBlue},
+    listing options={
+        language={},
+        basicstyle=\small\ttfamily,
+        columns=fullflexible,
+        keepspaces=true,
+        breaklines=true,
+        showstringspaces=false,
+        numbers=none,
+        frame=none,
+        keywordstyle=\color{black},
+        commentstyle=\color{black},
+        stringstyle=\color{black},
+        identifierstyle=\color{black}
+    }
+}
+
+
+%--------------------------------------------------------------------
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{codebackground},
+    commentstyle=\color{codecomment},
+    keywordstyle=\color{codekeyword},
+    stringstyle=\color{codestring},
+    identifierstyle=\color{codeidentifier},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numberstyle=\tiny\color{codelinenumbers}, 
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,    
+    citecolor=green,
+    urlcolor=blue,
+    pdftitle={Lời giải Quiz: Data Warehouse, Data Lake và Data Lakehouse},
+    pdfpagemode=FullScreen,
+}
+
+%--------------------------------------------------------------------
+\newcounter{choice}
+\renewcommand\thechoice{($\alph{choice}$)}
+\newcommand\choicelabel{\thechoice}
+
+%--------------------------------------------------------------------
+\newenvironment{choices}%
+  {\list{\choicelabel}%
+     {\usecounter{choice}\def\makelabel##1{\hss\llap{##1}}%
+       \settowidth{\leftmargin}{W.\hskip\labelsep\hskip 0 em}%
+       \def\choice{%
+         \item
+       } % choice
+       \labelwidth\leftmargin\advance\labelwidth-\labelsep
+       \topsep=0pt
+       \partopsep=0pt
+     }%
+  }%
+  {\endlist}
+  
+%--------------------------------------------------------------------
+\def\CChoice{%
+      \choice
+      \addanswer{\theenumi}{\thechoice}%
+    }
+    \let\CChoice\CChoice
+%    \par % Uncomment this to have choices always start a new line
+   % \let\par\@empty
+    % If we're continuing the textbf containing the question,
+    % then leave a bit of space before the first choice:
+    \ifvmode\else\enskip\fi
+    \ignorespaces
+  %
+  {}
+\makeatother
+\newbox\allanswers
+\setbox\allanswers=\hbox{}
+\newcommand{\addanswer}[2]{%
+  \global\setbox\allanswers=\hbox{\unhbox\allanswers \quad #1.~#2}%
+}
+\newcommand{\showanswers}{%
+  \vfill
+  \begin{center}
+    Answers
+  \end{center}
+  \unhbox\allanswers
+}
+
+\makeatletter
+\newenvironment{multichoices}[1][1]{%
+\begin{multicols}{#1}}{%
+\end{multicols}}
+\makeatother
+
+\pagestyle{fancy}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\E}{\mathbb{E}}
+
+% Outline --------------------------------------------------------------------
+% Section numbering ----------------------------------------------------------
+\renewcommand{\thesection}{\Roman{section}.} 
+\renewcommand{\thesubsection}{\thesection\arabic{subsection}.}
+\renewcommand{\thesubsubsection}{\thesubsection\arabic{subsubsection}.}
+
+% Paper-like section title sizes --------------------------------------------
+% Title paper: 17pt
+% Section should be clearly smaller than title but still prominent.
+\titleformat{\section}
+  {\normalfont\fontsize{16pt}{20pt}\selectfont\bfseries}
+  {\thesection}
+  {0.85em}
+  {}
+
+\titleformat{\subsection}
+  {\normalfont\fontsize{14pt}{16pt}\selectfont\bfseries}
+  {\thesubsection}
+  {0.75em}
+  {}
+
+\titleformat{\subsubsection}
+  {\normalfont\fontsize{12pt}{15pt}\selectfont\bfseries}
+  {\thesubsubsection}
+  {0.65em}
+  {}
+
+% Paper-like compact spacing -------------------------------------------------
+\titlespacing*{\section}
+  {0pt}
+  {1.25em plus 0.2em minus 0.1em}
+  {0.65em plus 0.1em minus 0.1em}
+
+\titlespacing*{\subsection}
+  {0pt}
+  {1.0em plus 0.2em minus 0.1em}
+  {0.45em plus 0.1em minus 0.1em}
+
+\titlespacing*{\subsubsection}
+  {0pt}
+  {0.85em plus 0.15em minus 0.1em}
+  {0.35em plus 0.1em minus 0.1em}
+
+
+% Logo + Title ---------------------------------------------------------------
+
+\setlength{\droptitle}{-7em}
+
+% Title horizontal rule
+\newcommand{\TitleRule}{%
+  \rule{0.90\textwidth}{0.6pt}
+}
+
+% Chiều cao vùng title giữa 2 rule
+\newlength{\TitleBlockHeight}
+\setlength{\TitleBlockHeight}{2.2cm}
+
+\pretitle{%
+  
+
+  % Logo row
+  \begin{tabular}{@{}c@{\hspace{1.0em}}c@{\hspace{1.0em}}c@{}}
+    \raisebox{-0.35\height}{\includegraphics[height=2.0cm]{Figures/aio2026_logo.pdf}}    
+  \end{tabular}
+
+  %\vspace{0.2em}
+
+\begin{center}
+  \TitleRule
+  \par\nointerlineskip
+}
+
+\title{%
+  \parbox[c][\TitleBlockHeight][c]{0.90\textwidth}{%
+    \centering
+    {\fontsize{20pt}{24pt}\selectfont\bfseries Lời giải Quiz: Data Warehouse,\\ Data Lake và Data Lakehouse}\\[6pt]
+    {\fontsize{13pt}{15pt}\selectfont (Data Architecture)}
+  }%
+}
+
+\posttitle{%
+  \par\nointerlineskip
+  \TitleRule
+  \end{center}
+}
+
+\preauthor{%
+  \begin{center}
+  \fontsize{11pt}{13pt}\selectfont
+}
+
+\author{%
+  \textbf{Tác giả 1}
+  \hspace{2.8em}
+  \textbf{Tác giả 2}\\
+  \vspace{1em}
+  \textbf{Proofreading: }
+}
+
+\postauthor{%
+  \par
+  \end{center}
+}
+
+\date{}
+% Header --------------------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\href{https://www.facebook.com/aivietnam.edu.vn}{\textcolor{aivnGreen}{\bfseries AI VIET NAM (AIO2026)}}}
+\rhead{\href{https://aivietnam.edu.vn/}{\textcolor{aivnGreen}{\bfseries aivietnam.edu.vn}}}
+\fancyfoot[r]{\textcolor{aivnGreen}{\bfseries\foreignlanguage{vietnamese}{Trang \thepage}}}
+\fancyfoot[l]{%
+  \href{https://zalo.me/84911118758}{%
+    \textcolor{aivnGreen}{\bfseries\foreignlanguage{vietnamese}{SĐT/Zalo: 0911118758 (Dr. Hồng Phúc)}}%
+  }%
+}
+\renewcommand{\headrulewidth}{1.0pt}
+\renewcommand{\headrule}{{\color{aivnGreen}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}}
+
+\renewcommand{\footrulewidth}{1.0pt}
+\renewcommand{\footrule}{{\color{aivnGreen}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}}
+
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \fancyfoot[r]{\textcolor{aivnGreen}{\bfseries\foreignlanguage{vietnamese}{Trang \thepage}}}
+    \fancyfoot[l]{%
+      \href{https://zalo.me/84911118758}{%
+        \textcolor{aivnGreen}{\bfseries\foreignlanguage{vietnamese}{SĐT/Zalo: 0911118758 (Dr. Hồng Phúc)}}%
+      }%
+    }
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{1.0pt}
+    \renewcommand{\footrule}{%
+        {\color{aivnGreen}\hrule width\headwidth height\footrulewidth}
+    }
+}
+
+
+
+\begin{document}
+\maketitle
+\thispagestyle{firstpage}
+\vspace{-3em}
+\noindent Đáp án: 1c, 2b, 3d, 4a, 5c, 6b, 7a, 8a, 9d, 10c, 11b, 12a, 13b, 14d.
+
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=1.6em, itemsep=1.2em]
+\item Một công ty lưu dữ liệu đơn hàng thành các file Parquet dưới prefix \texttt{s3://shop/orders/}. Spark và Trino đọc ``bảng'' \texttt{orders} bằng cách liệt kê mọi file dưới prefix này rồi tự suy ra schema. Hệ thống không có catalog hay transaction log nào. Theo tiêu chí ``lớp nào sở hữu khái niệm bảng'', đây là kiến trúc gì?
+
+\begin{enumerate}[label=\alph*), leftmargin=2.2em, itemsep=1pt]
+    \item Data Warehouse, vì dữ liệu được lưu ở định dạng columnar.
+    \item Data Lakehouse, vì nhiều engine cùng đọc một bản dữ liệu.
+    \item Data Lake, vì không lớp nào sở hữu bảng; ``bảng'' chỉ là một prefix thư mục.
+    \item Data Lakehouse, vì footer của file Parquet đã chứa schema.
+\end{enumerate}
+\begin{guidelinebox}{Đáp án: c)}
+Engine tự liệt kê prefix và tự suy ra schema, nghĩa là không có catalog hay table format nào định nghĩa bảng. Đó là đặc điểm của Data Lake. Columnar (a) chỉ là cách lưu file. Việc nhiều engine cùng đọc (b) cũng xảy ra ở Data Lake. Schema trong footer Parquet (d) chỉ mô tả từng file, không mô tả bảng: nó không cho biết những file nào thuộc bảng hay phiên bản nào là hiện hành.
+\end{guidelinebox}
+
+\item File \texttt{trips.parquet} có 4 row group. Footer cho biết khoảng giá trị của cột \texttt{fare\_amount} trong từng row group: RG1 $[2, 45]$, RG2 $[3, 60]$, RG3 $[5, 480]$, RG4 $[1, 38]$. Với truy vấn \texttt{SELECT avg(tip\_amount) FROM trips WHERE fare\_amount > 100}, một engine hỗ trợ projection pushdown và predicate pushdown sẽ đọc những gì?
+
+\begin{enumerate}[label=\alph*), leftmargin=2.2em, itemsep=1pt]
+    \item Cả 4 row group, đọc tất cả các cột.
+    \item Chỉ RG3, và chỉ hai cột \texttt{fare\_amount}, \texttt{tip\_amount}.
+    \item Chỉ RG3, nhưng đọc tất cả các cột.
+    \item Cả 4 row group, nhưng chỉ đọc cột \texttt{tip\_amount}.
+\end{enumerate}
+\begin{guidelinebox}{Đáp án: b)}
+Predicate pushdown bỏ qua RG1, RG2 và RG4 vì giá trị lớn nhất của chúng đều nhỏ hơn 100. Chỉ RG3 (max = 480) có thể chứa dòng thỏa điều kiện. Projection pushdown chỉ đọc các cột truy vấn cần: \texttt{fare\_amount} để lọc và \texttt{tip\_amount} để tính trung bình. Phương án (d) sai vì vẫn phải đọc \texttt{fare\_amount} để kiểm tra điều kiện từng dòng trong RG3.
+\end{guidelinebox}
+
+\item Một job upstream ghi nhầm một file có cột \texttt{VendorID} kiểu chuỗi vào cùng prefix của Data Lake, nơi các file khác đều lưu \texttt{VendorID} kiểu số nguyên. Lỗi này thường được phát hiện vào lúc nào?
+
+\begin{enumerate}[label=\alph*), leftmargin=2.2em, itemsep=1pt]
+    \item Ngay lúc ghi, vì object storage kiểm tra schema của file.
+    \item Ngay lúc ghi, vì Parquet không cho ghi chuỗi vào một cột số.
+    \item Không bao giờ, vì engine tự bỏ qua các file sai kiểu.
+    \item Khi một engine quét prefix đó, thường là trong truy vấn của một người khác.
+\end{enumerate}
+\begin{guidelinebox}{Đáp án: d)}
+Data Lake theo nguyên tắc schema-on-read: không ai kiểm tra schema khi ghi. Object storage chỉ lưu byte (a sai). File Parquet hợp lệ với schema riêng của nó, trong đó \texttt{VendorID} là chuỗi (b sai). Lỗi chỉ lộ ra khi engine đọc glob và cố ép kiểu, như lỗi \texttt{ConversionException} ở phần thực hành. Engine không tự bỏ qua file sai (c sai), mà làm hỏng cả truy vấn.
+\end{guidelinebox}
+
+\item Một job ghi dữ liệu tháng 2 thành 4 file và bị dừng sau khi ghi xong file thứ hai. Một reader truy vấn ngay sau đó. Kết quả nào đúng?
+
+\begin{enumerate}[label=\alph*), leftmargin=2.2em, itemsep=1pt]
+    \item Data Lake: reader thấy 2 file đã ghi mà không có cảnh báo. Iceberg: reader vẫn thấy snapshot cũ vì con trỏ trong catalog chưa đổi.
+    \item Data Lake: reader báo lỗi thiếu file. Iceberg: reader thấy 2 file đã ghi.
+    \item Cả hai đều thấy 2 file đã ghi, vì object storage có strong consistency.
+    \item Cả hai đều không thấy file nào, vì object storage chỉ hiển thị file khi job kết thúc.
+\end{enumerate}
+\begin{guidelinebox}{Đáp án: a)}
+Ở Data Lake, ``bảng'' là mọi file dưới prefix, nên 2 file dở dang lập tức thuộc về bảng. Phần thực hành cho thấy reader thấy đúng 50\% số dòng mà không có cảnh báo. Ở Iceberg, data file mới chỉ được nhìn thấy khi metadata trỏ tới chúng và con trỏ trong catalog được đổi ở bước commit. Job chết trước commit nên snapshot hiện hành không đổi, 2 file kia trở thành orphan file. Strong consistency (c) chỉ bảo đảm đọc thấy object vừa ghi, không bảo đảm tính nguyên tử của nhiều file.
+\end{guidelinebox}
+
+\item Cho năm thành phần của một bảng Iceberg: (1) \texttt{snap-<id>.avro}, (2) \texttt{\dots-m0.avro}, (3) \texttt{00006-\dots.metadata.json}, (4) \texttt{part-0.parquet}, (5) bản ghi của bảng trong catalog. Khi lập kế hoạch đọc bảng, engine đi qua chúng theo thứ tự nào?
+
+\begin{enumerate}[label=\alph*), leftmargin=2.2em, itemsep=1pt]
+    \item (3) $\rightarrow$ (5) $\rightarrow$ (1) $\rightarrow$ (2) $\rightarrow$ (4)
+    \item (5) $\rightarrow$ (1) $\rightarrow$ (3) $\rightarrow$ (2) $\rightarrow$ (4)
+    \item (5) $\rightarrow$ (3) $\rightarrow$ (1) $\rightarrow$ (2) $\rightarrow$ (4)
+    \item (5) $\rightarrow$ (3) $\rightarrow$ (2) $\rightarrow$ (1) $\rightarrow$ (4)
+\end{enumerate}
+\begin{guidelinebox}{Đáp án: c)}
+Catalog giữ con trỏ tới \texttt{metadata.json} hiện hành (5 $\rightarrow$ 3). \texttt{metadata.json} cho biết snapshot hiện hành và manifest list của nó (3 $\rightarrow$ 1). Manifest list liệt kê các manifest (1 $\rightarrow$ 2). Manifest liệt kê data file kèm thống kê cột (2 $\rightarrow$ 4). Phương án (d) đảo ngược manifest và manifest list: file \texttt{snap-*.avro} chính là manifest list, nằm trên manifest.
+\end{guidelinebox}
+
+\item Writer A và writer B cùng đọc metadata phiên bản 7 của một bảng Iceberg, rồi mỗi bên ghi data file mới vào một partition khác nhau. A commit trước và thành công, con trỏ giờ trỏ tới phiên bản 8. Điều gì xảy ra khi B commit?
+
+\begin{enumerate}[label=\alph*), leftmargin=2.2em, itemsep=1pt]
+    \item B ghi đè phiên bản 8, dữ liệu của A bị mất.
+    \item Phép compare-and-swap của B thất bại vì con trỏ không còn là 7. B đọc phiên bản 8, thấy không xung đột, tạo phiên bản 9 chứa cả hai thay đổi rồi commit lại.
+    \item B bị chặn cho tới khi A trả lại khóa (lock) trên bảng.
+    \item Catalog tự gộp hai file \texttt{metadata.json} của A và B thành một.
+\end{enumerate}
+\begin{guidelinebox}{Đáp án: b)}
+Iceberg dùng optimistic concurrency: không khóa trước (c sai), xung đột được phát hiện lúc commit bằng compare-and-swap. CAS của B chỉ thành công nếu con trỏ vẫn là 7, nên B không thể ghi đè A (a sai). B phải tự đọc metadata mới, kiểm tra xung đột và tạo metadata mới; catalog không gộp metadata hộ (d sai). Vì hai writer ghi vào hai partition khác nhau nên không có xung đột dữ liệu và B commit lại thành công.
+\end{guidelinebox}
+
+\item Đoạn code PyIceberg sau chạy trên một catalog trống. Giả sử lệnh \texttt{delete} xóa ít nhất một dòng. Sau khi chạy xong, \texttt{tbl.snapshots()} có bao nhiêu snapshot?
+
+\begin{aivncodebox}[Code]
+\begin{python}
+tbl = catalog.create_table("silver.trips", schema=schema)
+tbl.append(jan)
+with tbl.update_schema() as u:
+    u.add_column("tip_per_mile", DoubleType())
+with tbl.update_spec() as s:
+    s.add_field("pickup_at", DayTransform(), "pickup_day")
+tbl.append(feb)
+tbl.delete(delete_filter=GreaterThan("fare_amount", 500.0))
+\end{python}
+\end{aivncodebox}
+\begin{enumerate}[label=\alph*), leftmargin=2.2em, itemsep=1pt]
+    \item 3
+    \item 4
+    \item 5
+    \item 6
+\end{enumerate}
+\begin{guidelinebox}{Đáp án: a)}
+Snapshot chỉ được tạo khi tập data file của bảng thay đổi. \texttt{create\_table} tạo bảng rỗng, chưa có snapshot. \texttt{update\_schema} và \texttt{update\_spec} chỉ tạo \texttt{metadata.json} mới. Hai lệnh \texttt{append} và lệnh \texttt{delete} tạo ba snapshot với operation lần lượt là \texttt{append}, \texttt{append}, \texttt{overwrite}, đúng như output của \texttt{02\_silver\_lakehouse.py}. Số file \texttt{metadata.json} thì nhiều hơn số snapshot.
+\end{guidelinebox}
+
+\item Tiếp tục câu 7. Khi đọc các dòng tháng 1 (được ghi trước lệnh \texttt{add\_column}), cột \texttt{tip\_per\_mile} có giá trị gì?
+
+\begin{enumerate}[label=\alph*), leftmargin=2.2em, itemsep=1pt]
+    \item NULL, vì file tháng 1 không chứa field ID của cột mới và không bị ghi lại.
+    \item Giá trị được Iceberg tự tính từ \texttt{tip\_amount} và \texttt{trip\_distance}.
+    \item Truy vấn báo lỗi schema mismatch cho tới khi ghi lại toàn bộ bảng.
+    \item 0, vì Iceberg điền giá trị mặc định của kiểu double.
+\end{enumerate}
+\begin{guidelinebox}{Đáp án: a)}
+Iceberg ánh xạ cột qua field ID. Cột mới có field ID 16, không tồn tại trong file tháng 1, nên reader trả NULL; thêm cột là thao tác chỉ chạm metadata, không ghi lại file (c sai). Iceberg không hiểu ý nghĩa nghiệp vụ của cột nên không tự tính giá trị (b sai). Phần thực hành in ra \texttt{[None, None, None]} cho các dòng này, và lớp Gold dùng \texttt{coalesce} để tính lại.
+\end{guidelinebox}
+
+\item Một bảng Iceberg ban đầu không có partition và đang chứa 1 file dữ liệu tháng 1. Đội dữ liệu thêm partition \texttt{day(pickup\_at)} rồi append dữ liệu tháng 2 (28 ngày). Nhận định nào đúng?
+
+\begin{enumerate}[label=\alph*), leftmargin=2.2em, itemsep=1pt]
+    \item Iceberg tự ghi lại file tháng 1 thành 31 file theo ngày.
+    \item Muốn được partition pruning, truy vấn phải lọc trên cột \texttt{pickup\_day}.
+    \item File tháng 1 bị loại khỏi snapshot hiện hành vì không khớp partition spec mới.
+    \item File tháng 1 giữ spec cũ (\texttt{spec\_id} 0), file tháng 2 theo spec mới (\texttt{spec\_id} 1); điều kiện trên \texttt{pickup\_at} vẫn loại được file ở cả hai spec.
+\end{enumerate}
+\begin{guidelinebox}{Đáp án: d)}
+Partition evolution chỉ áp dụng cho dữ liệu ghi sau thay đổi; file cũ không bị ghi lại (a sai) và vẫn thuộc snapshot (c sai). Với hidden partitioning, người dùng lọc trên cột gốc \texttt{pickup\_at}, còn engine tự quy đổi sang partition (b sai). File spec 1 được loại theo giá trị partition, file spec 0 được loại nhờ min/max của \texttt{pickup\_at} trong manifest. Ở phần thực hành, truy vấn ngày 15/02 chỉ đọc 1/29 file.
+\end{guidelinebox}
+
+\item Bảng \texttt{orders} (2 TB) nhận dữ liệu CDC từ database vận hành: cứ 5 phút lại có vài nghìn lệnh \texttt{UPDATE} rải rác khắp bảng. Dashboard đọc bảng vài lần mỗi giờ. Chiến lược nào phù hợp nhất?
+
+\begin{enumerate}[label=\alph*), leftmargin=2.2em, itemsep=1pt]
+    \item Copy-on-Write, vì đọc luôn nhanh nhất.
+    \item Ghi lại toàn bộ bảng sau mỗi 5 phút để không phải dùng delete file.
+    \item Merge-on-Read (delete file hoặc deletion vector), kết hợp compaction định kỳ.
+    \item Bỏ table format, ghi thẳng file mới vào Data Lake.
+\end{enumerate}
+\begin{guidelinebox}{Đáp án: c)}
+Cập nhật rải rác khắp bảng khiến Copy-on-Write phải ghi lại rất nhiều file lớn mỗi 5 phút (a sai), còn ghi lại 2 TB thì càng tệ hơn (b sai). Merge-on-Read chỉ ghi phần thay đổi; chi phí gộp lúc đọc chấp nhận được vì dashboard chỉ đọc vài lần mỗi giờ, và compaction định kỳ giữ cho số delete file không tăng mãi. Bỏ table format (d) đồng nghĩa với mất ACID và mất \texttt{UPDATE}.
+\end{guidelinebox}
+
+\item Dùng PyIceberg 0.12, đội dữ liệu chạy \texttt{expire\_snapshots} chỉ giữ snapshot hiện hành, rồi thấy dung lượng thư mục \texttt{data/} không giảm. Giải thích nào đúng và cần làm gì tiếp?
+
+\begin{enumerate}[label=\alph*), leftmargin=2.2em, itemsep=1pt]
+    \item Lệnh expire chưa được commit; chạy lại lệnh là đủ.
+    \item Expire chỉ xóa snapshot khỏi metadata. Các file không còn được tham chiếu đã thành orphan file và cần được dọn riêng, với ngưỡng thời gian đủ xa để không xóa nhầm file của job đang ghi.
+    \item Các file vẫn cần cho time travel về những snapshot đã expire nên không được xóa.
+    \item Cần chạy compaction thì dung lượng mới giảm.
+\end{enumerate}
+\begin{guidelinebox}{Đáp án: b)}
+Trong PyIceberg 0.12, \texttt{expire\_snapshots} chỉ cập nhật metadata; phần thực hành cho thấy số snapshot giảm từ 302 xuống 1 nhưng thư mục \texttt{data/} vẫn có 301 file. Snapshot đã expire thì không time travel được nữa (c sai). Compaction (d) còn tạo thêm file mới. Bước dọn orphan file mới thu hồi dung lượng. Lưu ý: procedure \texttt{expire\_snapshots} của Spark tự xóa các file chỉ thuộc snapshot đã expire, còn \texttt{remove\_orphan\_files} xử lý những file mà không metadata nào biết tới.
+\end{guidelinebox}
+
+\item Dữ liệu khách hàng đến từ CRM và ERP với địa chỉ mâu thuẫn nhau. Cần khử trùng lặp, chọn bản ghi đáng tin cậy và lưu lịch sử thay đổi địa chỉ theo SCD Type 2. Trong kiến trúc Medallion, việc này nên đặt ở lớp nào?
+
+\begin{enumerate}[label=\alph*), leftmargin=2.2em, itemsep=1pt]
+    \item Silver
+    \item Bronze
+    \item Gold
+    \item Trong chính hệ thống CRM và ERP
+\end{enumerate}
+\begin{guidelinebox}{Đáp án: a)}
+Silver là nơi tạo ra thực thể nghiệp vụ đã làm sạch và thống nhất giữa các nguồn: chuẩn hóa schema, khử trùng lặp, áp quy tắc chọn bản ghi, SCD Type 2. Bronze phải giữ nguyên dữ liệu nguồn để có thể chạy lại pipeline (b sai). Gold dùng các thực thể đã sạch để dựng star schema và metric cho từng mục đích sử dụng (c sai). Hệ thống nguồn không thuộc phạm vi của nền tảng phân tích (d sai).
+\end{guidelinebox}
+
+\item \texttt{fact\_trips} có 5.848.609 dòng. Sau khi \texttt{INNER JOIN} với \texttt{dim\_payment\_type} (không có điều kiện \texttt{WHERE}), kết quả chỉ còn 5.712.662 dòng. Nguyên nhân khả dĩ nhất và cách phát hiện là gì?
+
+\begin{enumerate}[label=\alph*), leftmargin=2.2em, itemsep=1pt]
+    \item DuckDB làm tròn số khi JOIN; cần đổi sang kiểu \texttt{DECIMAL}.
+    \item Một số \texttt{payment\_type\_key} trong fact không có trong dimension (ví dụ mã 0) nên bị \texttt{INNER JOIN} loại; phát hiện bằng test khóa ngoại mồ côi (\texttt{LEFT JOIN \dots{} WHERE dim.key IS NULL}).
+    \item Snapshot Iceberg đã thay đổi giữa hai truy vấn.
+    \item Dimension có dòng trùng khóa nên JOIN làm giảm số dòng.
+\end{enumerate}
+\begin{guidelinebox}{Đáp án: b)}
+Chênh lệch $5.848.609 - 5.712.662 = 135.947$ đúng bằng số chuyến có mã thanh toán 0 (\textit{Flex Fare trip}) trong phần thực hành. \texttt{INNER JOIN} lặng lẽ loại các dòng không tìm thấy dimension tương ứng. Dimension trùng khóa (d) làm \emph{tăng} số dòng chứ không giảm. Fact table là bảng DuckDB đã được tạo xong, không bị ảnh hưởng bởi snapshot Iceberg (c sai). Làm tròn số (a) không thay đổi số dòng.
+\end{guidelinebox}
+
+\item Nhận định nào \textbf{không} phải là vấn đề của kiến trúc hai tầng (Data Lake + Data Warehouse) mà Armbrust và cộng sự nêu ra?
+
+\begin{enumerate}[label=\alph*), leftmargin=2.2em, itemsep=1pt]
+    \item Dữ liệu trong warehouse trễ hơn nguồn hàng giờ đến hàng ngày.
+    \item Phải lưu hai bản dữ liệu và trả tiền compute cho ETL.
+    \item Thư viện ML khó đọc trực tiếp dữ liệu nằm trong warehouse.
+    \item Object storage không lưu được file Parquet.
+\end{enumerate}
+\begin{guidelinebox}{Đáp án: d)}
+Ba vấn đề (a), (b), (c) lần lượt là dữ liệu cũ, tổng chi phí sở hữu và hỗ trợ hạn chế cho ML, cùng với độ tin cậy khi đồng bộ hai hệ thống. Object storage lưu được mọi loại file, kể cả Parquet; chính khả năng này là nền móng của Data Lake và Lakehouse.
+\end{guidelinebox}
+
+\end{enumerate}
+\end{document}

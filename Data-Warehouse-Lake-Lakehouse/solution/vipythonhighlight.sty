@@ -1,0 +1,188 @@
+% ------------------------------------------------------------------
+%  pythonhighlight.sty – Python code highlighting with full
+%  Vietnamese (UTF‑8) support
+%  2025‑04‑21 – patched by ChatGPT (underscore fix)
+% ------------------------------------------------------------------
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{vipythonhighlight}[2025-04-21 Python code highlighting with Vietnamese UTF‑8]
+
+% ---------- Unicode + Vietnamese fonts + hyphenation ---------------
+\RequirePackage[utf8]{inputenc}      % let pdfLaTeX read UTF‑8 files
+\RequirePackage[T5]{fontenc}         % Vietnamese glyph slots
+\RequirePackage[vietnamese]{babel}   % proper hyphenation patterns
+\RequirePackage{listingsutf8}        % pass full UTF‑8 to listings
+% ------------------------------------------------------------------
+
+\RequirePackage{listings}
+\RequirePackage{xcolor}
+\RequirePackage{xparse}
+
+% ------------------------------------------------------------------
+% General colours and wording
+% ------------------------------------------------------------------
+\renewcommand*{\lstlistlistingname}{Code Listings}
+\renewcommand*{\lstlistingname}{Code Listing}
+
+\definecolor{gray}{gray}{0.5}
+\colorlet{commentcolour}{green!50!black}
+\colorlet{stringcolour}{red!60!black}
+\colorlet{keywordcolour}{magenta!90!black}
+\colorlet{exceptioncolour}{yellow!50!red}
+\colorlet{commandcolour}{blue!60!black}
+\colorlet{numpycolour}{blue!60!green}
+\colorlet{literatecolour}{magenta!90!black}
+\colorlet{promptcolour}{green!50!black}
+\colorlet{specmethodcolour}{violet}
+
+\newcommand*{\framemargin}{3ex}
+\newcommand*{\literatecolour}{\textcolor{literatecolour}}
+\newcommand*{\pythonprompt}{\textcolor{promptcolour}{{>}{>}{>}}}
+
+% ------------------------------------------------------------------
+% Full Vietnamese literate table  (tone × base‑vowel × diacritic)
+% ------------------------------------------------------------------
+\def\vn@literate{%
+  % lower‑case
+  {á}{{\'a}}1 {à}{{\`a}}1 {ả}{{\u{a}}}1 {ã}{{\~a}}1 {ạ}{{\d a}}1%
+  {ă}{{\u a}}1 {ắ}{{\u\'a}}1 {ằ}{{\u\`a}}1 {ẳ}{{\u\u{a}}}1 {ẵ}{{\u\~a}}1 {ặ}{{\u\d a}}1%
+  {â}{{\^a}}1 {ấ}{{\^\'a}}1 {ầ}{{\^\`a}}1 {ẩ}{{\^\u{a}}}1 {ẫ}{{\^\~a}}1 {ậ}{{\^\d a}}1%
+  {đ}{{\dj}}1%
+  {é}{{\'e}}1 {è}{{\`e}}1 {ẻ}{{\u{e}}}1 {ẽ}{{\~e}}1 {ẹ}{{\d e}}1%
+  {ê}{{\^e}}1 {ế}{{\^\'e}}1 {ề}{{\^\`e}}1 {ể}{{\^\u{e}}}1 {ễ}{{\^\~e}}1 {ệ}{{\^\d e}}1%
+  {í}{{\'i}}1 {ì}{{\`i}}1 {ỉ}{{\u{i}}}1 {ĩ}{{\~i}}1 {ị}{{\d i}}1%
+  {ó}{{\'o}}1 {ò}{{\`o}}1 {ỏ}{{\u{o}}}1 {õ}{{\~o}}1 {ọ}{{\d o}}1%
+  {ô}{{\^o}}1 {ố}{{\^\'o}}1 {ồ}{{\^\`o}}1 {ổ}{{\^\u{o}}}1 {ỗ}{{\^\~o}}1 {ộ}{{\^\d o}}1%
+  {ơ}{{\o o}}1 {ớ}{{\o\'o}}1 {ờ}{{\o\`o}}1 {ở}{{\o\u{o}}}1 {ỡ}{{\o\~o}}1 {ợ}{{\o\d o}}1%
+  {ú}{{\'u}}1 {ù}{{\`u}}1 {ủ}{{\u{u}}}1 {ũ}{{\~u}}1 {ụ}{{\d u}}1%
+  {ư}{{\u u}}1 {ứ}{{\u\'u}}1 {ừ}{{\u\`u}}1 {ử}{{\u\u{u}}}1 {ữ}{{\u\~u}}1 {ự}{{\u\d u}}1%
+  {ý}{{\'y}}1 {ỳ}{{\`y}}1 {ỷ}{{\u{y}}}1 {ỹ}{{\~y}}1 {ỵ}{{\d y}}1%
+  % upper‑case
+  {Á}{{\'A}}1 {À}{{\`A}}1 {Ả}{{\u{A}}}1 {Ã}{{\~A}}1 {Ạ}{{\d A}}1%
+  {Ă}{{\u A}}1 {Ắ}{{\u\'A}}1 {Ằ}{{\u\`A}}1 {Ẳ}{{\u\u{A}}}1 {Ẵ}{{\u\~A}}1 {Ặ}{{\u\d A}}1%
+  {Â}{{\^A}}1 {Ấ}{{\^\'A}}1 {Ầ}{{\^\`A}}1 {Ẩ}{{\^\u{A}}}1 {Ẫ}{{\^\~A}}1 {Ậ}{{\^\d A}}1%
+  {Đ}{{\DJ}}1%
+  {É}{{\'E}}1 {È}{{\`E}}1 {Ẻ}{{\u{E}}}1 {Ẽ}{{\~E}}1 {Ẹ}{{\d E}}1%
+  {Ê}{{\^E}}1 {Ế}{{\^\'E}}1 {Ề}{{\^\`E}}1 {Ể}{{\^\u{E}}}1 {Ễ}{{\^\~E}}1 {Ệ}{{\^\d E}}1%
+  {Í}{{\'I}}1 {Ì}{{\`I}}1 {Ỉ}{{\u{I}}}1 {Ĩ}{{\~I}}1 {Ị}{{\d I}}1%
+  {Ó}{{\'O}}1 {Ò}{{\`O}}1 {Ỏ}{{\u{O}}}1 {Õ}{{\~O}}1 {Ọ}{{\d O}}1%
+  {Ô}{{\^O}}1 {Ố}{{\^\'O}}1 {Ồ}{{\^\`O}}1 {Ổ}{{\^\u{O}}}1 {Ỗ}{{\^\~O}}1 {Ộ}{{\^\d O}}1%
+  {Ơ}{{\o O}}1 {Ớ}{{\o\'O}}1 {Ờ}{{\o\`O}}1 {Ở}{{\o\u{O}}}1 {Ỡ}{{\o\~O}}1 {Ợ}{{\o\d O}}1%
+  {Ú}{{\'U}}1 {Ù}{{\`U}}1 {Ủ}{{\u{U}}}1 {Ũ}{{\~U}}1 {Ụ}{{\d U}}1%
+  {Ư}{{\u U}}1 {Ứ}{{\u\'U}}1 {Ừ}{{\u\`U}}1 {Ử}{{\u\u{U}}}1 {Ữ}{{\u\~U}}1 {Ự}{{\u\d U}}1%
+  {Ý}{{\'Y}}1 {Ỳ}{{\`Y}}1 {Ỷ}{{\u{Y}}}1 {Ỹ}{{\~Y}}1 {Ỵ}{{\d Y}}1%
+}
+
+% ------------------------------------------------------------------
+% 1) Main listing style for Python blocks
+% ------------------------------------------------------------------
+\lstdefinestyle{pythonhighlight-style}{
+  language      = python,
+  inputencoding = utf8,
+  extendedchars = true,
+  columns       = fullflexible,
+  keepspaces    = true,
+  showtabs      = true,
+  tab=,
+  tabsize       = 2,
+  basicstyle    = \ttfamily\footnotesize,
+  stringstyle   = \color{stringcolour},
+  showstringspaces = false,
+  alsoletter    = {0123456789\_},   % <-- “_” is now part of identifiers
+  otherkeywords = {\%, \}, \{, \&, \|},
+  keywordstyle  = \color{keywordcolour}\bfseries,
+  emph={and,as,async,await,break,class,continue,def,yield,del,elif,else,%
+    except,exec,finally,for,from,global,if,import,in,%
+    lambda,not,or,pass,print,raise,return,try,while,assert,with},
+  emphstyle     = \color{blue}\bfseries,
+  emph={[2]True,False,None},
+  emphstyle=[2]\color{keywordcolour},
+  emph={[3]object,type,isinstance,copy,deepcopy,zip,enumerate,reversed,list,set,%
+    len,dict,tuple,xrange,append,execfile,real,imag,reduce,str,repr},
+  emphstyle=[3]\color{commandcolour},
+  emph={Exception,NameError,IndexError,SyntaxError,TypeError,ValueError,%
+    OverflowError,ZeroDivisionError},
+  emphstyle=\color{exceptioncolour}\bfseries,
+  morecomment   = [s]{"""}{"""},
+  commentstyle  = \color{commentcolour}\slshape,
+  frame         = single,
+  backgroundcolor=\color{white},
+  breakindent   = .5\textwidth,
+  breaklines    = true
+  % literate      = *\vn@literate   % (may be re‑enabled if needed)
+}
+
+% ------------------------------------------------------------------
+% 2) For inputting external Python files
+% ------------------------------------------------------------------
+\newcommand*{\inputpython}[3]{%
+  \lstinputlisting[
+    firstline=#2,
+    lastline=#3,
+    firstnumber=#2,
+    frame=single,
+    breakindent=.5\textwidth,
+    breaklines=true,
+    style=pythonhighlight-style]{#1}%
+}
+
+\NewDocumentCommand\inputpythonfile{moo}{%
+  \lstinputlisting[
+    firstline=\IfValueTF{#2}{#2}{0},
+    lastline=\IfValueTF{#3}{#3}{9999999},
+    frame=single,
+    breakindent=.5\textwidth,
+    breaklines=true,
+    style=pythonhighlight-style]{#1}%
+}
+
+\lstnewenvironment{python}[2][]{%
+  \lst@TestEOLChar{#2}%
+  \lstset{style=pythonhighlight-style}%
+  \lstset{#1}%
+  \csname\@lst @SetFirstNumber\endcsname}{%
+  \let\if@nobreak\iffalse%
+  \csname\@lst @SaveFirstNumber\endcsname}
+
+% ------------------------------------------------------------------
+% 3) Inline‑code style  (inherits Vietnamese literate table)
+% ------------------------------------------------------------------
+\lstdefinestyle{pythonhighlight-inline-style}{
+  style        = pythonhighlight-style,
+  basicstyle   = \ttfamily,
+  keywordstyle = \color{keywordcolour},
+  columns      = fullflexible,
+  breaklines   = true,
+  breakatwhitespace=false,
+  keepspaces   = true,
+  prebreak     = \mbox{-},
+  literate     =
+    {=}{{\literatecolour=}}2
+    {-}{{\literatecolour-}}2
+    {+}{{\literatecolour+}}2
+    {*}{{\literatecolour*}}2
+    {**}{{\literatecolour{**}}}3
+    {/}{{\literatecolour/}}2
+    {//}{{\literatecolour{//}}}2
+    {!}{{\literatecolour!}}2
+    {[]}{{\literatecolour[]}}2
+    {<}{{\literatecolour<}}2
+    {<=}{{\literatecolour{<=}}}3
+    {>}{{\literatecolour>}}2
+    {>=}{{\literatecolour{>=}}}3
+    {==}{{\literatecolour{==}}}3
+    {!=}{{\literatecolour{!=}}}3
+    {+=}{{\literatecolour{+=}}}3
+    {-=}{{\literatecolour{-=}}}3
+    {*=}{{\literatecolour{*=}}}3
+    {/=}{{\literatecolour{/=}}}3
+}
+
+% ------------------------------------------------------------------
+% 4) Convenience macro for inline Python fragments
+% ------------------------------------------------------------------
+\newcommand*{\pyth}{\lstinline[style=pythonhighlight-inline-style]}
+
+% ------------------------------------------------------------------
+% End of pythonhighlight.sty
+% ------------------------------------------------------------------
