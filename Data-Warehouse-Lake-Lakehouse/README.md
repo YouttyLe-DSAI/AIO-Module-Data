@@ -11,8 +11,9 @@ Bộ tài liệu Self-Learning (AIO2026) cho bài học về ba kiến trúc d�
 | `description/references.bib` | Tài liệu tham khảo của bài đọc |
 | `solution/solution.tex`, `solution.pdf` | Lời giải: đề, đáp án và giải thích cho từng câu |
 | `solution/code/` | 4 script thực hành và `requirements.txt` |
+| `slide/slide.pptx` | Bản nháp 30 slide trên template slide AIVN; `slide/assets/` chứa hình cắt từ bài đọc, ảnh thật và logo kèm `CREDITS.md` ghi nguồn |
 
-Thư mục `slide/` chưa có. Theo quy định của chương trình, slide phải do người làm bài tự thiết kế trên template slide của AIVN.
+Bản nháp slide cần được người làm bài chỉnh sửa lại trước khi nộp, vì chương trình yêu cầu slide do người học tự thiết kế.
 
 ## Biên dịch LaTeX
 
